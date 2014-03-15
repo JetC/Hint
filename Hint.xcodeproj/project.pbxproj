@@ -13,14 +13,14 @@
 		DF09154018D455460084B562 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF09153E18D455460084B562 /* InfoPlist.strings */; };
 		DF09154218D455460084B562 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09154118D455460084B562 /* main.m */; };
 		DF09154618D455460084B562 /* SFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09154518D455460084B562 /* SFAppDelegate.m */; };
-		DF09154918D455460084B562 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF09154718D455460084B562 /* Main.storyboard */; };
-		DF09154C18D455460084B562 /* SFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09154B18D455460084B562 /* SFViewController.m */; };
+		DF09154918D455460084B562 /* MainStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF09154718D455460084B562 /* MainStoryBoard.storyboard */; };
 		DF09154E18D455460084B562 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF09154D18D455460084B562 /* Images.xcassets */; };
 		DF09155518D455460084B562 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF09155418D455460084B562 /* XCTest.framework */; };
 		DF09155618D455460084B562 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF09153518D455460084B562 /* Foundation.framework */; };
 		DF09155718D455460084B562 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF09153918D455460084B562 /* UIKit.framework */; };
 		DF09155F18D455460084B562 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF09155D18D455460084B562 /* InfoPlist.strings */; };
 		DF09156118D455460084B562 /* HintTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09156018D455460084B562 /* HintTests.m */; };
+		DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80505B18D47984009D6103 /* SFSettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,15 +44,15 @@
 		DF09154318D455460084B562 /* Hint-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hint-Prefix.pch"; sourceTree = "<group>"; };
 		DF09154418D455460084B562 /* SFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAppDelegate.h; sourceTree = "<group>"; };
 		DF09154518D455460084B562 /* SFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAppDelegate.m; sourceTree = "<group>"; };
-		DF09154818D455460084B562 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DF09154A18D455460084B562 /* SFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFViewController.h; sourceTree = "<group>"; };
-		DF09154B18D455460084B562 /* SFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFViewController.m; sourceTree = "<group>"; };
+		DF09154818D455460084B562 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryBoard.storyboard; sourceTree = "<group>"; };
 		DF09154D18D455460084B562 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DF09155318D455460084B562 /* HintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF09155418D455460084B562 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		DF09155C18D455460084B562 /* HintTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HintTests-Info.plist"; sourceTree = "<group>"; };
 		DF09155E18D455460084B562 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DF09156018D455460084B562 /* HintTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HintTests.m; sourceTree = "<group>"; };
+		DF80505A18D47984009D6103 /* SFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingViewController.h; sourceTree = "<group>"; };
+		DF80505B18D47984009D6103 /* SFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +114,10 @@
 			children = (
 				DF09154418D455460084B562 /* SFAppDelegate.h */,
 				DF09154518D455460084B562 /* SFAppDelegate.m */,
-				DF09154718D455460084B562 /* Main.storyboard */,
-				DF09154A18D455460084B562 /* SFViewController.h */,
-				DF09154B18D455460084B562 /* SFViewController.m */,
+				DF09154718D455460084B562 /* MainStoryBoard.storyboard */,
 				DF09154D18D455460084B562 /* Images.xcassets */,
+				DF80505A18D47984009D6103 /* SFSettingViewController.h */,
+				DF80505B18D47984009D6103 /* SFSettingViewController.m */,
 				DF09153C18D455460084B562 /* Supporting Files */,
 			);
 			path = Hint;
@@ -200,6 +200,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "孙培峰";
 				TargetAttributes = {
+					DF09153118D455460084B562 = {
+						DevelopmentTeam = XJ85624L97;
+					};
 					DF09155218D455460084B562 = {
 						TestTargetID = DF09153118D455460084B562;
 					};
@@ -231,7 +234,7 @@
 			files = (
 				DF09154E18D455460084B562 /* Images.xcassets in Resources */,
 				DF09154018D455460084B562 /* InfoPlist.strings in Resources */,
-				DF09154918D455460084B562 /* Main.storyboard in Resources */,
+				DF09154918D455460084B562 /* MainStoryBoard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF09154218D455460084B562 /* main.m in Sources */,
-				DF09154C18D455460084B562 /* SFViewController.m in Sources */,
+				DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */,
 				DF09154618D455460084B562 /* SFAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,12 +286,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		DF09154718D455460084B562 /* Main.storyboard */ = {
+		DF09154718D455460084B562 /* MainStoryBoard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DF09154818D455460084B562 /* Base */,
 			);
-			name = Main.storyboard;
+			name = MainStoryBoard.storyboard;
 			sourceTree = "<group>";
 		};
 		DF09155D18D455460084B562 /* InfoPlist.strings */ = {
@@ -377,6 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hint/Hint-Prefix.pch";
 				INFOPLIST_FILE = "Hint/Hint-Info.plist";
@@ -390,6 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hint/Hint-Prefix.pch";
 				INFOPLIST_FILE = "Hint/Hint-Info.plist";
@@ -457,6 +462,7 @@
 				DF09156618D455460084B562 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DF09156718D455460084B562 /* Build configuration list for PBXNativeTarget "HintTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +471,7 @@
 				DF09156918D455460084B562 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
