@@ -17,6 +17,7 @@
 @implementation SFSettingViewController
 @synthesize renRenConnectionStatusLabel = _renRenConnectionStatusLabel;
 @synthesize renRenLoginButton = _renRenLoginButton;
+@synthesize friendsListTable = _friendsListTable;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -104,10 +105,89 @@
     [alertView show];
 }
 
+
+- (IBAction)fetchFriendsList:(id)sender
+{
+    if([[Renren sharedRenren] isSessionValid]){//已登录状态,设置requestParam,设置请求参数:好友列表第1页,500条,name字段的数据.
+        ROGetFriendsInfoRequestParam *requestParam = [[ROGetFriendsInfoRequestParam alloc] init];
+        requestParam.page = @"1";
+        requestParam.count = @"500";
+        requestParam.fields = @"name";
+        
+        [[Renren sharedRenren] getFriendsInfo:requestParam andDelegate:self];
+    }
+    else
+    {
+        //未登录状态提示用户"您还没有授权"
+        UIAlertView *alertView =[[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有授权" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+/**
+ * 接口请求成功，第三方开发者实现这个方法
+ * @param renren 传回代理服务器接口请求的Renren类型对象。
+ * @param response 传回接口请求的响应。
+ */
+- (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response
+{
+    //创建好友数组.
+    self.friendsListArray = [[NSMutableArray alloc] init];
+    //取得请求结果.
+    NSMutableArray *friendsArray = (NSMutableArray *)response.rootObject;
+    
+    //将请求结果对象中的name信息放到数组中.
+    for (ROUserResponseItem *friend in friendsArray) {
+        [self.friendsListArray addObject:friend.name];
+    }
+    
+    //Table View重新加载数据.
+    [self.friendsListTable reloadData];
+}
+
+/**
+ * 接口请求失败，第三方开发者实现这个方法
+ * @param renren 传回代理服务器接口请求的Renren类型对象。
+ * @param response 传回接口请求的错误对象。
+ */
+- (void)renren:(Renren *)renren requestFailWithError:(ROError*)error
+{
+    UIAlertView *alertView =[[UIAlertView alloc] initWithTitle:@"错误提示" message:@"API请求错误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.friendsListArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row < self.friendsListArray.count) {
+        UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"friendsListCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"friendsListCell"];
+        }
+        
+        cell.textLabel.text = (NSString *)[self.friendsListArray objectAtIndex:indexPath.row];
+        
+        return cell;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
+
 - (void)dealloc
 {
     self.renRenConnectionStatusLabel = nil;
     self.renRenLoginButton = nil;
+    self.friendsListTable = nil;
+    self.friendsListArray = nil;
 }
 
 @end

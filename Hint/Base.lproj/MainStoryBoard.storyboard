@@ -105,11 +105,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5No-Sf-Bg3">
+                                <rect key="frame" x="115" y="198" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="获取好友信息">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fetchFriendsList:" destination="yKf-gj-gPX" eventType="touchUpInside" id="9Py-Ko-dKi"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0lz-nd-gAv">
+                                <rect key="frame" x="0.0" y="331" width="320" height="284"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="设置" id="qxP-Bu-lSf"/>
                     <connections>
+                        <outlet property="friendsListTable" destination="0lz-nd-gAv" id="XRf-x4-znu"/>
                         <outlet property="pushNotificationSwitcher" destination="0E3-KE-wNo" id="VnU-Cw-wLw"/>
                         <outlet property="renRenConnectionStatusLabel" destination="tus-kz-AFe" id="Ly7-ZA-5Xo"/>
                         <outlet property="renRenLoginButton" destination="dth-Zv-ZLz" id="zyu-am-wUc"/>
