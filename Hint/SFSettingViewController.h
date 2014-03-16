@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFSettingViewController : UIViewController
+@interface SFSettingViewController : UIViewController<RenrenDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *renRenConnectionStatusLabel;
+@property (weak, nonatomic) IBOutlet UIButton *renRenLoginButton;
+@property (weak, nonatomic) IBOutlet UISwitch *pushNotificationSwitcher;
+
+- (IBAction)login:(id)sender;
+
 
 @end
