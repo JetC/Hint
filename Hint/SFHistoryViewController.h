@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFHistoryViewController : UIViewController<TimelineViewDataSource, TimelineViewDelegate>
+@interface SFHistoryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-- (IBAction)deleteButtonPush:(id)sender;
-- (IBAction)swapButtonPush:(id)sender;
-- (IBAction)insertTopButtonPush:(id)sender;
+@property (nonatomic,strong) UITableView *timeLineTableView;
 
-@property (weak, nonatomic) IBOutlet TimelineView *timelineView;
 
 @end

@@ -20,6 +20,8 @@
 		DF09155718D455460084B562 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF09153918D455460084B562 /* UIKit.framework */; };
 		DF09155F18D455460084B562 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF09155D18D455460084B562 /* InfoPlist.strings */; };
 		DF09156118D455460084B562 /* HintTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09156018D455460084B562 /* HintTests.m */; };
+		DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */; };
+		DF6269B118D5D3B700A614CB /* SFHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */; };
 		DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80505B18D47984009D6103 /* SFSettingViewController.m */; };
 		DF80512E18D47FD2009D6103 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DF80512D18D47FD2009D6103 /* libsqlite3.0.dylib */; };
 		DF80520318D53045009D6103 /* RennSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF80520118D53045009D6103 /* RennSDK.framework */; };
@@ -57,6 +59,9 @@
 		DF09155C18D455460084B562 /* HintTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HintTests-Info.plist"; sourceTree = "<group>"; };
 		DF09155E18D455460084B562 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DF09156018D455460084B562 /* HintTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HintTests.m; sourceTree = "<group>"; };
+		DF6269AA18D5D30E00A614CB /* SFHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryTableViewCell.h; sourceTree = "<group>"; };
+		DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryTableViewCell.m; sourceTree = "<group>"; };
+		DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		DF80505A18D47984009D6103 /* SFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingViewController.h; sourceTree = "<group>"; };
 		DF80505B18D47984009D6103 /* SFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSettingViewController.m; sourceTree = "<group>"; };
 		DF80512D18D47FD2009D6103 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -135,13 +140,10 @@
 				DF09154718D455460084B562 /* MainStoryBoard.storyboard */,
 				DF09154D18D455460084B562 /* Images.xcassets */,
 				DF80520818D54BD3009D6103 /* SFTabBarController.h */,
-				DF80520E18D557DD009D6103 /* SFHistoryViewController.h */,
-				DF80520F18D557DD009D6103 /* SFHistoryViewController.m */,
 				DF80520918D54BD3009D6103 /* SFTabBarController.m */,
-				DF80505A18D47984009D6103 /* SFSettingViewController.h */,
-				DF80520B18D55126009D6103 /* SFAddingNewItemViewController.h */,
-				DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */,
-				DF80505B18D47984009D6103 /* SFSettingViewController.m */,
+				DF6269AD18D5D31900A614CB /* HistoryView */,
+				DF6269AE18D5D32700A614CB /* SettingView */,
+				DF6269AF18D5D33700A614CB /* AddLovingPerson */,
 				DF80520118D53045009D6103 /* RennSDK.framework */,
 				DF80520218D53045009D6103 /* RennSDK.bundle */,
 				DF09153C18D455460084B562 /* Supporting Files */,
@@ -176,6 +178,36 @@
 				DF09155D18D455460084B562 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DF6269AD18D5D31900A614CB /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				DF80520E18D557DD009D6103 /* SFHistoryViewController.h */,
+				DF80520F18D557DD009D6103 /* SFHistoryViewController.m */,
+				DF6269AA18D5D30E00A614CB /* SFHistoryTableViewCell.h */,
+				DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */,
+				DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */,
+			);
+			name = HistoryView;
+			sourceTree = "<group>";
+		};
+		DF6269AE18D5D32700A614CB /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				DF80505A18D47984009D6103 /* SFSettingViewController.h */,
+				DF80505B18D47984009D6103 /* SFSettingViewController.m */,
+			);
+			name = SettingView;
+			sourceTree = "<group>";
+		};
+		DF6269AF18D5D33700A614CB /* AddLovingPerson */ = {
+			isa = PBXGroup;
+			children = (
+				DF80520B18D55126009D6103 /* SFAddingNewItemViewController.h */,
+				DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */,
+			);
+			name = AddLovingPerson;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +292,7 @@
 			files = (
 				DF09154E18D455460084B562 /* Images.xcassets in Resources */,
 				DF09154018D455460084B562 /* InfoPlist.strings in Resources */,
+				DF6269B118D5D3B700A614CB /* SFHistoryTableViewCell.xib in Resources */,
 				DF09154918D455460084B562 /* MainStoryBoard.storyboard in Resources */,
 				DF80520418D53045009D6103 /* RennSDK.bundle in Resources */,
 			);
@@ -281,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */,
+				DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */,
 				DF80520A18D54BD3009D6103 /* SFTabBarController.m in Sources */,
 				DF09154218D455460084B562 /* main.m in Sources */,
 				DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */,
