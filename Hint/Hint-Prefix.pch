@@ -14,4 +14,15 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "RennSDK/RennSDK.h"
+    #define kStatusBarHeight 20
+    #define kNavigationBarHeight 44
+    #define kNavigationBarWithStatusBarHeight 64
+    #define kTabBarHeight 49
+
+    #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+    #define IOSSystemVersion [[[UIDevice currentDevice] systemVersion] floatValue]
+
+    // rgb颜色转换（16进制->10进制）
+    #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 #endif

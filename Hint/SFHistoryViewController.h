@@ -10,7 +10,6 @@
 
 @interface SFHistoryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic,strong) UITableView *timeLineTableView;
 
 
 @end

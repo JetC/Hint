@@ -12,6 +12,4 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *labelOnTableCell;
 @property (weak, nonatomic) IBOutlet UIImageView *imageOnTableCell;
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSString *image;
 @end

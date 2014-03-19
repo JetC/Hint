@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFSettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface SFSettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RennLoginDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *renRenConnectionStatusLabel;
 @property (weak, nonatomic) IBOutlet UIButton *renRenLoginButton;

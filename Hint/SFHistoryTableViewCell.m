@@ -15,8 +15,6 @@
 @implementation SFHistoryTableViewCell
 @synthesize imageOnTableCell;
 @synthesize labelOnTableCell;
-@synthesize image;
-@synthesize title;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -39,15 +37,6 @@
     // Configure the view for the selected state
 }
 
-- (void)setImage:(NSString *)image
-{
-    self.imageOnTableCell.image = [UIImage imageNamed:[image copy]];
-}
 
-- (void)setTitle:(NSString *)title
-{
-    self.labelOnTableCell.text = [self.title copy];
-    //此时对“title”的修改就被变为了直接修改Lable的标题
-}
 
 @end

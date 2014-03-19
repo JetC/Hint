@@ -11,6 +11,10 @@
 
 @interface SFHistoryViewController ()
 
+//@property (nonatomic, strong) NSMutableArray *messagesArray;
+//@property (nonatomic, strong) NSArray *labelIngredientsArray;
+@property (nonatomic,strong) UITableView *timeLineTableView;
+
 @end
 
 @implementation SFHistoryViewController
@@ -30,11 +34,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.timeLineTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewCellStyleDefault];
+    self.timeLineTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kNavigationBarWithStatusBarHeight, 320, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
     self.timeLineTableView.dataSource = self;
     self.timeLineTableView.delegate = self;
+    self.timeLineTableView.separatorStyle = NO;
+    
+//    self.labelIngredientsArray = [[NSArray alloc]init];
+//    self.messagesArray = [[NSMutableArray alloc]init];
+
+    
     [self.view addSubview:self.timeLineTableView];
 }
 
@@ -55,23 +65,38 @@
 }
 */
 
+#pragma mark TableView
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+//FIXME:应该为return  count类型，随时变化
+    return 33;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(SFHistoryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"SFHistoryTableViewCell";
-    SFHistoryTableViewCell *cell = [self.timeLineTableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SFHistoryTableViewCell" owner:nil options:nil];
-        cell = [nib objectAtIndex:0];
+    SFHistoryTableViewCell *cell = [self.timeLineTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    if (!cell)
+    {
+        cell = [[SFHistoryTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.image = @"1";
-    cell.title = @"Test";
+
+    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellIdentifier owner:nil options:nil];
+    cell = [nib objectAtIndex:0];
+    cell.imageOnTableCell.image = [UIImage imageNamed:@"1"];
+    cell.labelOnTableCell.text = @"Test";
+    NSLog(@"%ld   %@",(long)indexPath.row,cell.labelOnTableCell.text);
     
     return cell;
+
+    
+}
+
+//调整行高
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
 }
 
 @end

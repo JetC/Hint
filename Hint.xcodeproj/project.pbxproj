@@ -144,8 +144,7 @@
 				DF6269AD18D5D31900A614CB /* HistoryView */,
 				DF6269AE18D5D32700A614CB /* SettingView */,
 				DF6269AF18D5D33700A614CB /* AddLovingPerson */,
-				DF80520118D53045009D6103 /* RennSDK.framework */,
-				DF80520218D53045009D6103 /* RennSDK.bundle */,
+				DF12ADDA18D978FF00B59029 /* RenRenSDK */,
 				DF09153C18D455460084B562 /* Supporting Files */,
 			);
 			path = Hint;
@@ -178,6 +177,15 @@
 				DF09155D18D455460084B562 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DF12ADDA18D978FF00B59029 /* RenRenSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DF80520118D53045009D6103 /* RennSDK.framework */,
+				DF80520218D53045009D6103 /* RennSDK.bundle */,
+			);
+			name = RenRenSDK;
 			sourceTree = "<group>";
 		};
 		DF6269AD18D5D31900A614CB /* HistoryView */ = {
