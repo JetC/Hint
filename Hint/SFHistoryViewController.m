@@ -73,7 +73,7 @@
     return 33;
 }
 
--(SFHistoryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"SFHistoryTableViewCell";
     SFHistoryTableViewCell *cell = [self.timeLineTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -89,8 +89,6 @@
     NSLog(@"%ld   %@",(long)indexPath.row,cell.labelOnTableCell.text);
     
     return cell;
-
-    
 }
 
 //调整行高
