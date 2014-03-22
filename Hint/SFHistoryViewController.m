@@ -33,11 +33,11 @@
 
 - (void)viewDidLoad
 {
-//FIXME:很可能是初始化table不对
+//老黄说这里没问题
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.timeLineTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kNavigationBarWithStatusBarHeight, 320, SCREEN_HEIGHT) ];
-    [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
+    [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
     self.timeLineTableView.dataSource = self;
     self.timeLineTableView.delegate = self;
     self.timeLineTableView.separatorStyle = NO;
@@ -73,14 +73,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"SFHistoryTableViewCell";
-    SFHistoryTableViewCell *cell = [self.timeLineTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    if (!cell)
-    {
-        cell = [[SFHistoryTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+    SFHistoryTableViewCell *cell = [self.timeLineTableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellIdentifier owner:nil options:nil];
-    cell = [nib objectAtIndex:0];
+
+//    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellIdentifier owner:nil options:nil];
+//    cell = [nib objectAtIndex:0];
     cell.imageOnTableCell.image = [UIImage imageNamed:@"1"];
     cell.labelOnTableCell.text = @"Test";
     NSLog(@"%ld   %@",(long)indexPath.row,cell.labelOnTableCell.text);
@@ -89,6 +86,15 @@
     return cell;
     
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+
+
 
 //调整行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
