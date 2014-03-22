@@ -142,13 +142,12 @@
 				DF09154518D455460084B562 /* SFAppDelegate.m */,
 				DF09154718D455460084B562 /* MainStoryBoard.storyboard */,
 				DF09154D18D455460084B562 /* Images.xcassets */,
-				DF91321018DD20AA008251DD /* Reveal.framework */,
 				DF80520818D54BD3009D6103 /* SFTabBarController.h */,
 				DF80520918D54BD3009D6103 /* SFTabBarController.m */,
 				DF6269AD18D5D31900A614CB /* HistoryView */,
 				DF6269AE18D5D32700A614CB /* SettingView */,
 				DF6269AF18D5D33700A614CB /* AddLovingPerson */,
-				DF12ADDA18D978FF00B59029 /* RenRenSDK */,
+				DFF109B818DDBF27003F3D57 /* 3rd Party Frameworks */,
 				DF09153C18D455460084B562 /* Supporting Files */,
 			);
 			path = Hint;
@@ -220,6 +219,15 @@
 				DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */,
 			);
 			name = AddLovingPerson;
+			sourceTree = "<group>";
+		};
+		DFF109B818DDBF27003F3D57 /* 3rd Party Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DF12ADDA18D978FF00B59029 /* RenRenSDK */,
+				DF91321018DD20AA008251DD /* Reveal.framework */,
+			);
+			name = "3rd Party Frameworks";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -40,7 +40,8 @@
     [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
     self.timeLineTableView.dataSource = self;
     self.timeLineTableView.delegate = self;
-    self.timeLineTableView.separatorStyle = NO;
+    self.timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
     [self.view addSubview:self.timeLineTableView];
 }
@@ -67,7 +68,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //FIXME:应该为return  count类型，随时变化
-    return 33;
+    return 323;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,12 +76,12 @@
     static NSString *cellIdentifier = @"SFHistoryTableViewCell";
     SFHistoryTableViewCell *cell = [self.timeLineTableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-
+//TODO:查这两句的意思
 //    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellIdentifier owner:nil options:nil];
 //    cell = [nib objectAtIndex:0];
+    
     cell.imageOnTableCell.image = [UIImage imageNamed:@"1"];
     cell.labelOnTableCell.text = @"Test";
-    NSLog(@"%ld   %@",(long)indexPath.row,cell.labelOnTableCell.text);
     
 
     return cell;
@@ -92,7 +93,6 @@
     // Return the number of sections.
     return 1;
 }
-
 
 
 
