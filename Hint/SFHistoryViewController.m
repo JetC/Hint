@@ -33,17 +33,14 @@
 
 - (void)viewDidLoad
 {
+//FIXME:很可能是初始化table不对
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.timeLineTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kNavigationBarWithStatusBarHeight, 320, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.timeLineTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kNavigationBarWithStatusBarHeight, 320, SCREEN_HEIGHT) ];
     [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
     self.timeLineTableView.dataSource = self;
     self.timeLineTableView.delegate = self;
     self.timeLineTableView.separatorStyle = NO;
-    
-//    self.labelIngredientsArray = [[NSArray alloc]init];
-//    self.messagesArray = [[NSMutableArray alloc]init];
-
     
     [self.view addSubview:self.timeLineTableView];
 }
@@ -88,7 +85,9 @@
     cell.labelOnTableCell.text = @"Test";
     NSLog(@"%ld   %@",(long)indexPath.row,cell.labelOnTableCell.text);
     
+
     return cell;
+    
 }
 
 //调整行高

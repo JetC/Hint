@@ -29,6 +29,7 @@
 		DF80520A18D54BD3009D6103 /* SFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520918D54BD3009D6103 /* SFTabBarController.m */; };
 		DF80520D18D55126009D6103 /* SFAddingNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */; };
 		DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520F18D557DD009D6103 /* SFHistoryViewController.m */; };
+		DF91321218DD20AA008251DD /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF91321018DD20AA008251DD /* Reveal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAddingNewItemViewController.m; sourceTree = "<group>"; };
 		DF80520E18D557DD009D6103 /* SFHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryViewController.h; sourceTree = "<group>"; };
 		DF80520F18D557DD009D6103 /* SFHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryViewController.m; sourceTree = "<group>"; };
+		DF91321018DD20AA008251DD /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF91321218DD20AA008251DD /* Reveal.framework in Frameworks */,
 				DF80512E18D47FD2009D6103 /* libsqlite3.0.dylib in Frameworks */,
 				DF09153818D455460084B562 /* CoreGraphics.framework in Frameworks */,
 				DF09153A18D455460084B562 /* UIKit.framework in Frameworks */,
@@ -139,6 +142,7 @@
 				DF09154518D455460084B562 /* SFAppDelegate.m */,
 				DF09154718D455460084B562 /* MainStoryBoard.storyboard */,
 				DF09154D18D455460084B562 /* Images.xcassets */,
+				DF91321018DD20AA008251DD /* Reveal.framework */,
 				DF80520818D54BD3009D6103 /* SFTabBarController.h */,
 				DF80520918D54BD3009D6103 /* SFTabBarController.m */,
 				DF6269AD18D5D31900A614CB /* HistoryView */,
@@ -460,6 +464,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hint/Hint-Prefix.pch";
 				INFOPLIST_FILE = "Hint/Hint-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Hint",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -478,6 +491,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hint/Hint-Prefix.pch";
 				INFOPLIST_FILE = "Hint/Hint-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Hint",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
