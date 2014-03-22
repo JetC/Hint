@@ -41,7 +41,7 @@
     self.timeLineTableView.dataSource = self;
     self.timeLineTableView.delegate = self;
     self.timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.timeLineTableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight+kNavigationBarWithStatusBarHeight, 0);
     
     [self.view addSubview:self.timeLineTableView];
 }
@@ -81,7 +81,7 @@
 //    cell = [nib objectAtIndex:0];
     
     cell.imageOnTableCell.image = [UIImage imageNamed:@"1"];
-    cell.labelOnTableCell.text = @"Test";
+    cell.labelOnTableCell.text = [NSString stringWithFormat:@"Test %ld",(long)indexPath.row];
     
 
     return cell;
