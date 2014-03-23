@@ -1,18 +1,18 @@
 //
-//  SFTabBarController.m
+//  SFHistoryNavigationController.m
 //  Hint
 //
-//  Created by 孙培峰 on 14-3-16.
+//  Created by 孙培峰 on 14-3-22.
 //  Copyright (c) 2014年 孙培峰. All rights reserved.
 //
 
-#import "SFTabBarController.h"
+#import "SFHistoryNavigationController.h"
 
-@interface SFTabBarController ()
+@interface SFHistoryNavigationController ()
 
 @end
 
-@implementation SFTabBarController
+@implementation SFHistoryNavigationController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,11 +27,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tabBar.backgroundImage = [UIImage imageNamed:@"2.jpg"];
-    self.tabBar.translucent = NO;
-    self.tabBar.selectedImageTintColor = UIColorFromRGB(0xd95058);
+    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"1"] forBarMetrics:UIBarMetricsDefault];
+//以下内容仍不明白
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
 }
 
+//???:111
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

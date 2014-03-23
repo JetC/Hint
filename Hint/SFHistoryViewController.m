@@ -14,6 +14,7 @@
 //@property (nonatomic, strong) NSMutableArray *messagesArray;
 //@property (nonatomic, strong) NSArray *labelIngredientsArray;
 @property (nonatomic,strong) UITableView *timeLineTableView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 @end
 
@@ -42,6 +43,7 @@
     self.timeLineTableView.delegate = self;
     self.timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.timeLineTableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight+kNavigationBarWithStatusBarHeight, 0);
+    
     
     [self.view addSubview:self.timeLineTableView];
 }
@@ -80,7 +82,7 @@
 //    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellIdentifier owner:nil options:nil];
 //    cell = [nib objectAtIndex:0];
     
-    cell.imageOnTableCell.image = [UIImage imageNamed:@"1"];
+    cell.imageOnTableCell.image = [UIImage imageNamed:@"testIcon"];
     cell.labelOnTableCell.text = [NSString stringWithFormat:@"Test %ld",(long)indexPath.row];
     
 

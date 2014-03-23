@@ -30,6 +30,9 @@
 		DF80520D18D55126009D6103 /* SFAddingNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */; };
 		DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520F18D557DD009D6103 /* SFHistoryViewController.m */; };
 		DF91321218DD20AA008251DD /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF91321018DD20AA008251DD /* Reveal.framework */; };
+		DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */; };
+		DFF109C118DDD3A7003F3D57 /* SFSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */; };
+		DFF109C418DDD3D6003F3D57 /* SFAddingItemNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,12 @@
 		DF80520E18D557DD009D6103 /* SFHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryViewController.h; sourceTree = "<group>"; };
 		DF80520F18D557DD009D6103 /* SFHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryViewController.m; sourceTree = "<group>"; };
 		DF91321018DD20AA008251DD /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		DFF109BC18DDCD9F003F3D57 /* SFHistoryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryNavigationController.h; sourceTree = "<group>"; };
+		DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryNavigationController.m; sourceTree = "<group>"; };
+		DFF109BF18DDD3A7003F3D57 /* SFSettingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingNavigationController.h; sourceTree = "<group>"; };
+		DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSettingNavigationController.m; sourceTree = "<group>"; };
+		DFF109C218DDD3D6003F3D57 /* SFAddingItemNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAddingItemNavigationController.h; sourceTree = "<group>"; };
+		DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAddingItemNavigationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +154,8 @@
 				DF80520818D54BD3009D6103 /* SFTabBarController.h */,
 				DF80520918D54BD3009D6103 /* SFTabBarController.m */,
 				DF6269AD18D5D31900A614CB /* HistoryView */,
-				DF6269AE18D5D32700A614CB /* SettingView */,
 				DF6269AF18D5D33700A614CB /* AddLovingPerson */,
+				DF6269AE18D5D32700A614CB /* SettingView */,
 				DFF109B818DDBF27003F3D57 /* 3rd Party Frameworks */,
 				DF09153C18D455460084B562 /* Supporting Files */,
 			);
@@ -194,6 +203,8 @@
 		DF6269AD18D5D31900A614CB /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				DFF109BC18DDCD9F003F3D57 /* SFHistoryNavigationController.h */,
+				DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */,
 				DF80520E18D557DD009D6103 /* SFHistoryViewController.h */,
 				DF80520F18D557DD009D6103 /* SFHistoryViewController.m */,
 				DF6269AA18D5D30E00A614CB /* SFHistoryTableViewCell.h */,
@@ -206,6 +217,8 @@
 		DF6269AE18D5D32700A614CB /* SettingView */ = {
 			isa = PBXGroup;
 			children = (
+				DFF109BF18DDD3A7003F3D57 /* SFSettingNavigationController.h */,
+				DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */,
 				DF80505A18D47984009D6103 /* SFSettingViewController.h */,
 				DF80505B18D47984009D6103 /* SFSettingViewController.m */,
 			);
@@ -215,6 +228,8 @@
 		DF6269AF18D5D33700A614CB /* AddLovingPerson */ = {
 			isa = PBXGroup;
 			children = (
+				DFF109C218DDD3D6003F3D57 /* SFAddingItemNavigationController.h */,
+				DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */,
 				DF80520B18D55126009D6103 /* SFAddingNewItemViewController.h */,
 				DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */,
 			);
@@ -334,12 +349,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */,
+				DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */,
 				DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */,
 				DF80520A18D54BD3009D6103 /* SFTabBarController.m in Sources */,
 				DF09154218D455460084B562 /* main.m in Sources */,
 				DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */,
 				DF80520D18D55126009D6103 /* SFAddingNewItemViewController.m in Sources */,
 				DF09154618D455460084B562 /* SFAppDelegate.m in Sources */,
+				DFF109C418DDD3D6003F3D57 /* SFAddingItemNavigationController.m in Sources */,
+				DFF109C118DDD3A7003F3D57 /* SFSettingNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
