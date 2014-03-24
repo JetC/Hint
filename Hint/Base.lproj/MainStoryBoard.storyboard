@@ -117,6 +117,13 @@
                                     <action selector="fetchFriendsList:" destination="yKf-gj-gPX" eventType="touchUpInside" id="9Py-Ko-dKi"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4q7-b4-HwB">
+                                <rect key="frame" x="94" y="77" width="133" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -124,6 +131,7 @@
                     <navigationItem key="navigationItem" title="我的设置" id="anz-jg-fhE"/>
                     <connections>
                         <outlet property="pushNotificationSwitcher" destination="0E3-KE-wNo" id="VnU-Cw-wLw"/>
+                        <outlet property="renRenConnectionStatusLabel" destination="4q7-b4-HwB" id="yqg-np-38d"/>
                         <outlet property="renRenLoginButton" destination="dth-Zv-ZLz" id="zyu-am-wUc"/>
                     </connections>
                 </viewController>

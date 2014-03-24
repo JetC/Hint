@@ -17,7 +17,6 @@
 @implementation SFSettingViewController
 @synthesize renRenConnectionStatusLabel = _renRenConnectionStatusLabel;
 @synthesize renRenLoginButton = _renRenLoginButton;
-@synthesize friendsListTable = _friendsListTable;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,11 +40,11 @@
     
     if ([RennClient isLogin])
     {
-        self.renRenConnectionStatusLabel.text = @"注销";
+        self.renRenConnectionStatusLabel.text = @"要注销吗？点击下面按钮";
     }
     else
     {
-        self.renRenConnectionStatusLabel.text = @"登录";
+        self.renRenConnectionStatusLabel.text = @"要登录吗？点击下面按钮";
         [RennClient loginWithDelegate:self];
     }
 }
@@ -256,22 +255,20 @@
 
 - (void)rennLoginSuccess
 {
-    self.renRenConnectionStatusLabel.text = @"注销";
+    self.renRenConnectionStatusLabel.text = @"现在要注销吗？点击下面按钮";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"登录成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alertView show];
 }
 
 - (void)rennLogoutSuccess
 {
-    self.renRenConnectionStatusLabel.text = @"登录";
+    self.renRenConnectionStatusLabel.text = @"现在要登录吗？点击下面按钮";
 }
 
 - (void)dealloc
 {
     self.renRenConnectionStatusLabel = nil;
     self.renRenLoginButton = nil;
-    self.friendsListTable = nil;
-    self.friendsListArray = nil;
 }
 
 @end
