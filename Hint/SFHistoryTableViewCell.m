@@ -22,6 +22,7 @@
     if (self) {
         // Initialization code
 //        self.view
+        
     }
     return self;
 }

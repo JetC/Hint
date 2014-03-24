@@ -8,11 +8,11 @@
 
 #import "SFHistoryViewController.h"
 #import "SFHistoryTableViewCell.h"
+#warning 把.pch里面的人人SDK放到合适的文件里
+
 
 @interface SFHistoryViewController ()
 
-//@property (nonatomic, strong) NSMutableArray *messagesArray;
-//@property (nonatomic, strong) NSArray *labelIngredientsArray;
 @property (nonatomic,strong) UITableView *timeLineTableView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
@@ -41,7 +41,9 @@
     [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
     self.timeLineTableView.dataSource = self;
     self.timeLineTableView.delegate = self;
+    
     self.timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     self.timeLineTableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight+kNavigationBarWithStatusBarHeight, 0);
     
     
@@ -81,8 +83,15 @@
 //TODO:查这两句的意思
 //    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellIdentifier owner:nil options:nil];
 //    cell = [nib objectAtIndex:0];
+    if (indexPath.row % 2 == 0)
+    {
+        cell.imageOnTableCell.image = [UIImage imageNamed:@"UP TimeLine"];
+    }
+    else
+    {
+        cell.imageOnTableCell.image = [UIImage imageNamed:@"Down TimeLine"];
+    }
     
-    cell.imageOnTableCell.image = [UIImage imageNamed:@"testIcon"];
     cell.labelOnTableCell.text = [NSString stringWithFormat:@"Test %ld",(long)indexPath.row];
     
 

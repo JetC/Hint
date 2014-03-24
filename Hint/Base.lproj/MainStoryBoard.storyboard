@@ -117,18 +117,12 @@
                                     <action selector="fetchFriendsList:" destination="yKf-gj-gPX" eventType="touchUpInside" id="9Py-Ko-dKi"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0lz-nd-gAv">
-                                <rect key="frame" x="0.0" y="331" width="320" height="284"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="设置" image="4" id="qxP-Bu-lSf"/>
                     <navigationItem key="navigationItem" title="我的设置" id="anz-jg-fhE"/>
                     <connections>
-                        <outlet property="friendsListTable" destination="0lz-nd-gAv" id="XRf-x4-znu"/>
                         <outlet property="pushNotificationSwitcher" destination="0E3-KE-wNo" id="VnU-Cw-wLw"/>
                         <outlet property="renRenLoginButton" destination="dth-Zv-ZLz" id="zyu-am-wUc"/>
                     </connections>
