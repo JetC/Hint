@@ -8,15 +8,21 @@
 
 #import "SFSettingViewController.h"
 #import "RennSDK/RennSDK.h"
+#import "SBJSON.h"
+#import "SFRennFriendsListDelegate.h"
 
 @interface SFSettingViewController ()
 
+@property (strong, nonatomic) NSMutableArray *friendsListArray;
+@property (strong, nonatomic)SFRennFriendsListDelegate *friendsListDelegate;
 
 @end
 
 @implementation SFSettingViewController
 @synthesize renRenConnectionStatusLabel = _renRenConnectionStatusLabel;
 @synthesize renRenLoginButton = _renRenLoginButton;
+@synthesize tableView = _tableView;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -27,6 +33,20 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+    if (SCREEN_HEIGHT>480)
+    {
+        self.view.frame = CGRectMake(0, 0, 320, 548);
+    }
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 194, 320, self.view.frame.size.height-44-120) style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLoad
@@ -47,6 +67,9 @@
         self.renRenConnectionStatusLabel.text = @"要登录吗？点击下面按钮";
         [RennClient loginWithDelegate:self];
     }
+    self.friendsListArray = [[NSMutableArray alloc]init];
+    self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,63 +89,119 @@
 }
 */
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 14;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"testCell"];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"testCell"];
         cell.textLabel.font = [UIFont systemFontOfSize:16.0];
     }
     switch (row) {
         case 0:
-            cell.textLabel.text = @"相册";
+            cell.textLabel.text = @"批量获取用户信息";
             break;
         case 1:
-            cell.textLabel.text = @"评论";
+            cell.textLabel.text = @"以分页的方式获取某个用户与当前登录用户的共同好友";
             break;
         case 2:
-            cell.textLabel.text = @"新鲜事";
+            cell.textLabel.text = @"获取用户信息";
             break;
         case 3:
-            cell.textLabel.text = @"通知";
+            cell.textLabel.text = @"获取某个用户的好友列表";
             break;
         case 4:
-            cell.textLabel.text = @"照片";
+            cell.textLabel.text = @"获取当前登录用户在某个应用里的好友列表";
             break;
         case 5:
-            cell.textLabel.text = @"个人资料";
+            cell.textLabel.text = @"验证登录是否过期";
             break;
         case 6:
-            cell.textLabel.text = @"分享";
+            cell.textLabel.text = @"验证登录是否有效";
             break;
         case 7:
-            cell.textLabel.text = @"状态";
+            cell.textLabel.text = @"获取登录信息";
             break;
         case 8:
-            cell.textLabel.text = @"表情";
-            break;
-        case 9:
-            cell.textLabel.text = @"用户";
-            break;
-        case 10:
-            cell.textLabel.text = @"应用";
-            break;
-        case 11:
-            cell.textLabel.text = @"日志";
-            break;
-        case 12:
-            cell.textLabel.text = @"赞";
-            break;
+            cell.textLabel.text = @"获取未安装该应用好友列表";
         default:
             break;
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger row = indexPath.row;
+    switch (row) {
+        case 0:
+        {
+            BatchUserParam *param = [[BatchUserParam alloc] init];
+            param.userIds = [NSArray arrayWithObjects:[RennClient uid], nil];
+            [RennClient sendAsynRequest:param delegate:self];
+        }
+            break;
+        case 1:
+        {
+            ListUserFriendMutualParam *param = [[ListUserFriendMutualParam alloc] init] ;
+            param.userId = [RennClient uid];
+            [RennClient sendAsynRequest:param delegate:self];
+        }
+            break;
+        case 2:
+        {
+            GetUserParam *param = [[GetUserParam alloc] init] ;
+            param.userId = [RennClient uid];
+            [RennClient sendAsynRequest:param delegate:self];
+        }
+            break;
+        case 3:
+        {
+            
+            ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
+            param.userId = [RennClient uid];
+            param.pageNumber = 1;
+            param.pageSize = 20;
+            [RennClient sendAsynRequest:param delegate:self.friendsListDelegate];
+        }
+            break;
+        case 4:
+        {
+            ListUserFriendAppParam *param = [[ListUserFriendAppParam alloc] init];
+            [RennClient sendAsynRequest:param delegate:self];
+        }
+            break;
+        case 5:
+        {
+            //            AppLog(@"过期:%@",[RennClient isAuthorizeExpired] ? @"YES":@"NO");
+        }
+            break;
+        case 6:
+        {
+            //            AppLog(@"有效:%@",[RennClient isAuthorizeValid] ? @"YES":@"NO");
+        }
+            break;
+        case 7:
+        {
+            GetUserLoginParam *param = [[GetUserLoginParam alloc] init];
+            [RennClient sendAsynRequest:param delegate:self];
+        }
+            break;
+        case 8:
+        {
+            //            ListUserFriendUninstallAppParam *param = [[[ListUserFriendUninstallAppParam alloc] init] autorelease];
+            //            [RennClient sendAsynRequest:param delegate:self];
+        }
+        default:
+            break;
+    }
 }
 
 
@@ -132,123 +211,13 @@
     {
         [RennClient logoutWithDelegate:self];
     }
-    else {
+    else
+    {
         [RennClient loginWithDelegate:self];
     }
 }
 
 
-- (IBAction)fetchFriendsList:(id)sender
-{
-    PutFeedParam *param = [[PutFeedParam alloc] init];
-    param.title = @"新鲜事Title";
-    param.description = @"新鲜事Description";
-    param.message = @"这是一条新鲜事";
-    param.targetUrl = @"http://www.56.com/u72/v_OTAyNTkxMDk.html";
-    
-    [RennClient sendAsynRequest:param delegate:self];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (![RennClient isLogin]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
-    NSInteger row = indexPath.row;
-//    switch (row) {
-//        case 0:
-//        {
-//            AlbumViewController *controller = [[AlbumViewController alloc] initWithNibName:@"ApiViewController" bundle:nil];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 1:
-//        {
-//            CommentViewController *controller = [[[CommentViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 2:
-//        {
-//            FeedViewController *controller = [[[FeedViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 3:
-//        {
-//            NotificationViewController *controller = [[[NotificationViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 4:
-//        {
-//            PhotoViewController *controller = [[[PhotoViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 5:
-//        {
-//            ProfileViewController *controller = [[[ProfileViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 6:
-//        {
-//            ShareViewController *controller = [[[ShareViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 7:
-//        {
-//            StatusViewController *controller = [[[StatusViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 8:
-//        {
-//            UbbViewController *controller = [[[UbbViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 9:
-//        {
-//            UserViewController *controller = [[[UserViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 10:
-//        {
-//            AppViewController *controller = [[[AppViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 11:
-//        {
-//            BlogViewController *controller = [[[BlogViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        case 12:
-//        {
-//            LikeViewController *controller = [[[LikeViewController alloc] initWithNibName:@"ApiViewController" bundle:nil] autorelease];
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-}
-- (void)rennService:(RennService *)service requestSuccessWithResponse:(id)response
-{
-    
-}
-- (void)rennService:(RennService *)service requestFailWithError:(NSError*)error
-{
-    
-}
 #pragma mark login
 
 
@@ -269,6 +238,8 @@
 {
     self.renRenConnectionStatusLabel = nil;
     self.renRenLoginButton = nil;
+    [RennClient cancelForDelegate:self];
+
 }
 
 @end

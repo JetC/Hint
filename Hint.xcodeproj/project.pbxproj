@@ -35,6 +35,7 @@
 		DF80520A18D54BD3009D6103 /* SFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520918D54BD3009D6103 /* SFTabBarController.m */; };
 		DF80520D18D55126009D6103 /* SFAddingNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */; };
 		DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80520F18D557DD009D6103 /* SFHistoryViewController.m */; };
+		DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF9114BC18E5BF540051B4C0 /* SFRennFriendsListDelegate.m */; };
 		DF91321218DD20AA008251DD /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF91321018DD20AA008251DD /* Reveal.framework */; };
 		DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */; };
 		DFF109C118DDD3A7003F3D57 /* SFSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */; };
@@ -96,6 +97,8 @@
 		DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAddingNewItemViewController.m; sourceTree = "<group>"; };
 		DF80520E18D557DD009D6103 /* SFHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryViewController.h; sourceTree = "<group>"; };
 		DF80520F18D557DD009D6103 /* SFHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryViewController.m; sourceTree = "<group>"; };
+		DF9114BB18E5BF540051B4C0 /* SFRennFriendsListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFRennFriendsListDelegate.h; sourceTree = "<group>"; };
+		DF9114BC18E5BF540051B4C0 /* SFRennFriendsListDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFRennFriendsListDelegate.m; sourceTree = "<group>"; };
 		DF91321018DD20AA008251DD /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		DFF109BC18DDCD9F003F3D57 /* SFHistoryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryNavigationController.h; sourceTree = "<group>"; };
 		DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryNavigationController.m; sourceTree = "<group>"; };
@@ -261,6 +264,8 @@
 				DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */,
 				DF80505A18D47984009D6103 /* SFSettingViewController.h */,
 				DF80505B18D47984009D6103 /* SFSettingViewController.m */,
+				DF9114BB18E5BF540051B4C0 /* SFRennFriendsListDelegate.h */,
+				DF9114BC18E5BF540051B4C0 /* SFRennFriendsListDelegate.m */,
 			);
 			name = SettingView;
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 				DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */,
 				DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */,
 				DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */,
+				DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */,
 				DF42D5CB18E0524C002E82CA /* SBJsonParser.m in Sources */,
 				DF42D5CA18E0524C002E82CA /* SBJsonBase.m in Sources */,
 				DF42D5CC18E0524C002E82CA /* SBJsonWriter.m in Sources */,

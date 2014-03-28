@@ -13,7 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *renRenConnectionStatusLabel;
 @property (weak, nonatomic) IBOutlet UIButton *renRenLoginButton;
 @property (weak, nonatomic) IBOutlet UISwitch *pushNotificationSwitcher;
-@property (strong, nonatomic) NSMutableArray *friendsListArray;
+@property (nonatomic, strong) UITableView *tableView;
+
 
 
 - (IBAction)login:(id)sender;
