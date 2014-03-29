@@ -22,15 +22,31 @@
 {
     NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
     NSMutableArray *mArray = response;
-    for (NSUInteger i = 0; i<20; i++)
+    if ([mArray count] != 0)
     {
-        NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
-        [tmpArray addObject:[mArray objectAtIndex:i]];
-        
-        NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
-        
-        [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
+        for (NSUInteger i = 0; i<20; i++)
+        {
+            NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
+            if ([mArray count] > i)
+            {
+                
+                [tmpArray addObject:[mArray objectAtIndex:i]];
+                
+                NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
+                
+                [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
+            }
+            else
+            {
+                
+            }
+        }
     }
+    else
+    {
+        
+    }
+    
     
 }
 

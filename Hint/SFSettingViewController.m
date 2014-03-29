@@ -69,7 +69,7 @@
     }
     self.friendsListArray = [[NSMutableArray alloc]init];
     self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
-
+    self.friendsListArray = self.friendsListDelegate.friendsListArray;
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,12 +164,14 @@
             break;
         case 3:
         {
-            
-            ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
-            param.userId = [RennClient uid];
-            param.pageNumber = 1;
-            param.pageSize = 20;
-            [RennClient sendAsynRequest:param delegate:self.friendsListDelegate];
+            for (NSUInteger i = 1; i<30; i++)
+            {
+                ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
+                param.userId = [RennClient uid];
+                param.pageNumber = i;
+                param.pageSize = 20;
+                [RennClient sendAsynRequest:param delegate:self.friendsListDelegate];
+            }
         }
             break;
         case 4:
