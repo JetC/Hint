@@ -9,28 +9,46 @@
 #import "SFRennFriendsListDelegate.h"
 #import "SBJSON.h"
 
+@interface SFRennFriendsListDelegate ()
+
+@property (nonatomic, strong)NSMutableArray *mArray;
+@property (nonatomic, weak)SFSettingViewController *settingViewController;
+
+@end
+
 @implementation SFRennFriendsListDelegate
 
 - (id)init
 {
     self = [super init];
     self.friendsListArray = [[NSMutableArray alloc]init];
+    self.hasLoadingFriendsListFinished = NO;
+    [self loadList];
     return self;
+}
+
+- (void)loadList
+{
+    ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
+    param.userId = [RennClient uid];
+    param.pageNumber = 1;
+    param.pageSize = 100;
+    [RennClient sendAsynRequest:param delegate:self];
 }
 
 - (void)rennService:(RennService *)service requestSuccessWithResponse:(id)response
 {
     NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
-    NSMutableArray *mArray = response;
-    if ([mArray count] != 0)
+    self.mArray = response;
+    if ([self.mArray count] != 0 && self.hasLoadingFriendsListFinished == NO)
     {
-        for (NSUInteger i = 0; i<20; i++)
+        for (NSUInteger i = 0; i<100; i++)
         {
             NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
-            if ([mArray count] > i)
+            if ([self.mArray count] > i)
             {
                 
-                [tmpArray addObject:[mArray objectAtIndex:i]];
+                [tmpArray addObject:[self.mArray objectAtIndex:i]];
                 
                 NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
                 
@@ -38,13 +56,14 @@
             }
             else
             {
-                
+                self.hasLoadingFriendsListFinished = YES;
+
             }
         }
     }
     else
     {
-        
+        self.hasLoadingFriendsListFinished = YES;
     }
     
     

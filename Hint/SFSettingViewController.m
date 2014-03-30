@@ -56,7 +56,7 @@
                        apiKey:@"c1ae143617cf43138056d90c62461a83"
                     secretKey:@"6d407586023f4db996cc243fa1e4e8f6"];
     
-    [ RennClient setScope:@"read_user_blog,read_user_checkin,read_user_feed,read_user_guestbook,read_user_invitation,read_user_like_history,read_user_message,read_user_notification,read_user_photo,read_user_status,read_user_album,read_user_comment,read_user_share,read_user_request,publish_blog,publish_checkin,publish_feed,publish_share,write_guestbook,send_invitation,send_request,send_message,send_notification,photo_upload,status_update,create_album,publish_comment,operate_like,admin_page"];
+    [RennClient setScope:@"read_user_blog,read_user_checkin,read_user_feed,read_user_guestbook,read_user_invitation,read_user_like_history,read_user_message,read_user_notification,read_user_photo,read_user_status,read_user_album,read_user_comment,read_user_share,read_user_request,publish_blog,publish_checkin,publish_feed,publish_share,write_guestbook,send_invitation,send_request,send_message,send_notification,photo_upload,status_update,create_album,publish_comment,operate_like,admin_page"];
     
     if ([RennClient isLogin])
     {
@@ -70,6 +70,7 @@
     self.friendsListArray = [[NSMutableArray alloc]init];
     self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
     self.friendsListArray = self.friendsListDelegate.friendsListArray;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,14 +165,10 @@
             break;
         case 3:
         {
-            for (NSUInteger i = 1; i<30; i++)
-            {
-                ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
-                param.userId = [RennClient uid];
-                param.pageNumber = i;
-                param.pageSize = 20;
-                [RennClient sendAsynRequest:param delegate:self.friendsListDelegate];
-            }
+            SFRennFriendsListDelegate *fetchingFriendsListManager = [[SFRennFriendsListDelegate alloc]init];
+            
+            
+
         }
             break;
         case 4:

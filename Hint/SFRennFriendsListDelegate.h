@@ -7,8 +7,10 @@
 //
 
 #import <RennSDK/RennSDK.h>
+#import "SFSettingViewController.h"
 
 @interface SFRennFriendsListDelegate : RennClient
 @property (strong, nonatomic) NSMutableArray *friendsListArray;
+@property BOOL hasLoadingFriendsListFinished;
 
 @end
