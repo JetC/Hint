@@ -13,7 +13,6 @@
 
 @interface SFSettingViewController ()
 
-@property (strong, nonatomic) NSMutableArray *friendsListArray;
 @property (strong, nonatomic)SFRennFriendsListDelegate *friendsListDelegate;
 
 @end
@@ -70,7 +69,7 @@
     self.friendsListArray = [[NSMutableArray alloc]init];
     self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
     self.friendsListArray = self.friendsListDelegate.friendsListArray;
-    
+    self.friendsListDelegate.settingViewController = self;
 }
 
 - (void)didReceiveMemoryWarning

@@ -12,7 +12,6 @@
 @interface SFRennFriendsListDelegate ()
 
 @property (nonatomic, strong)NSMutableArray *mArray;
-@property (nonatomic, weak)SFSettingViewController *settingViewController;
 
 @end
 
@@ -23,23 +22,42 @@
     self = [super init];
     self.friendsListArray = [[NSMutableArray alloc]init];
     self.hasLoadingFriendsListFinished = NO;
-    [self loadList];
+    [self loadListForTheTime:1];
     return self;
 }
 
-- (void)loadList
+- (void)loadListForTheTime:(NSUInteger )timeLoaded
 {
-    ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
-    param.userId = [RennClient uid];
-    param.pageNumber = 1;
-    param.pageSize = 100;
-    [RennClient sendAsynRequest:param delegate:self];
+    static NSUInteger i = 1;
+    if (self.hasLoadingFriendsListFinished == NO)
+    {
+        for (i = 1+10*(timeLoaded-1); i<= 10+10*(timeLoaded-1); i++)
+        {
+            ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
+            param.userId = [RennClient uid];
+            param.pageNumber = i;
+            param.pageSize = 100;
+            [RennClient sendAsynRequest:param delegate:self];
+        }
+    }
+    else
+    {
+        
+    }
 }
 
 - (void)rennService:(RennService *)service requestSuccessWithResponse:(id)response
 {
     NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
     self.mArray = response;
+    if (response == nil)
+    {
+        <#statements#>
+    }
+    else
+    {
+    
+    }
     if ([self.mArray count] != 0 && self.hasLoadingFriendsListFinished == NO)
     {
         for (NSUInteger i = 0; i<100; i++)
@@ -51,7 +69,6 @@
                 [tmpArray addObject:[self.mArray objectAtIndex:i]];
                 
                 NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
-                
                 [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
             }
             else

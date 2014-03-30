@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *renRenLoginButton;
 @property (weak, nonatomic) IBOutlet UISwitch *pushNotificationSwitcher;
 @property (nonatomic, strong) UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *friendsListArray;
 
 
 

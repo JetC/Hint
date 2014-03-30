@@ -12,5 +12,7 @@
 @interface SFRennFriendsListDelegate : RennClient
 @property (strong, nonatomic) NSMutableArray *friendsListArray;
 @property BOOL hasLoadingFriendsListFinished;
+@property (nonatomic, weak)SFSettingViewController *settingViewController;
+
 
 @end
