@@ -7,6 +7,7 @@
 //
 
 #import "SFRennFriendsListDelegate.h"
+#import "SFRennFriendsListWithTag+ ListUserFriendParam.h"
 #import "SBJSON.h"
 
 @interface SFRennFriendsListDelegate ()
@@ -26,17 +27,18 @@
     return self;
 }
 
-- (void)loadListForTheTime:(NSUInteger )timeLoaded
+- (void)loadListForTheTime:(NSUInteger)timeLoaded
 {
     static NSUInteger i = 1;
     if (self.hasLoadingFriendsListFinished == NO)
     {
         for (i = 1+10*(timeLoaded-1); i<= 10+10*(timeLoaded-1); i++)
         {
-            ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
+            SFRennFriendsListWithTag__ListUserFriendParam *param = [[SFRennFriendsListWithTag__ListUserFriendParam alloc] init];
             param.userId = [RennClient uid];
             param.pageNumber = i;
             param.pageSize = 100;
+            param.tag = @"1";
             [RennClient sendAsynRequest:param delegate:self];
         }
     }
