@@ -50,37 +50,16 @@
 {
     NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
     self.mArray = response;
-    if (response == nil)
-    {
-        <#statements#>
-    }
-    else
-    {
     
-    }
-    if ([self.mArray count] != 0 && self.hasLoadingFriendsListFinished == NO)
-    {
-        for (NSUInteger i = 0; i<100; i++)
-        {
-            NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
-            if ([self.mArray count] > i)
-            {
-                
-                [tmpArray addObject:[self.mArray objectAtIndex:i]];
-                
-                NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
-                [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
-            }
-            else
-            {
-                self.hasLoadingFriendsListFinished = YES;
-
-            }
-        }
-    }
-    else
+    NSLog(@"%i",_mArray.count);
+    
+    if (_mArray.count == 0)
     {
         self.hasLoadingFriendsListFinished = YES;
+    }
+    else
+    {
+        [self serializingResponse];
     }
     
     
@@ -94,6 +73,25 @@
     NSLog(@"requestFailWithError:Error Domain = %@, Error Code = %@", domain, code);
 }
 
-
+- (void)serializingResponse
+{
+    for (NSUInteger i = 0; i<100; i++)
+    {
+        NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
+        if ([self.mArray count] > i)
+        {
+            
+            [tmpArray addObject:[self.mArray objectAtIndex:i]];
+            
+            NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
+            [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
+        }
+        else
+        {
+            self.hasLoadingFriendsListFinished = YES;
+            
+        }
+    }
+}
 
 @end

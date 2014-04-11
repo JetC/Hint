@@ -66,10 +66,10 @@
         self.renRenConnectionStatusLabel.text = @"要登录吗？点击下面按钮";
         [RennClient loginWithDelegate:self];
     }
-    self.friendsListArray = [[NSMutableArray alloc]init];
-    self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
-    self.friendsListArray = self.friendsListDelegate.friendsListArray;
-    self.friendsListDelegate.settingViewController = self;
+//    self.friendsListArray = [[NSMutableArray alloc]init];
+//    self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
+//    self.friendsListArray = self.friendsListDelegate.friendsListArray;
+//    self.friendsListDelegate.settingViewController = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,16 +164,14 @@
             break;
         case 3:
         {
-            SFRennFriendsListDelegate *fetchingFriendsListManager = [[SFRennFriendsListDelegate alloc]init];
-            
-            
-
+            [self setupFriendsListDelegate];
         }
             break;
         case 4:
         {
             ListUserFriendAppParam *param = [[ListUserFriendAppParam alloc] init];
             [RennClient sendAsynRequest:param delegate:self];
+            
         }
             break;
         case 5:
@@ -197,6 +195,7 @@
             //            ListUserFriendUninstallAppParam *param = [[[ListUserFriendUninstallAppParam alloc] init] autorelease];
             //            [RennClient sendAsynRequest:param delegate:self];
         }
+            break;
         default:
             break;
     }
@@ -227,10 +226,21 @@
     [alertView show];
 }
 
+- (void)setupFriendsListDelegate
+{
+    SFRennFriendsListDelegate *fetchingFriendsListManager = [[SFRennFriendsListDelegate alloc]init];
+    self.friendsListArray = [[NSMutableArray alloc]init];
+    self.friendsListDelegate = fetchingFriendsListManager;
+    self.friendsListArray = self.friendsListDelegate.friendsListArray;
+    self.friendsListDelegate.settingViewController = self;
+    
+}
+
 - (void)rennLogoutSuccess
 {
     self.renRenConnectionStatusLabel.text = @"现在要登录吗？点击下面按钮";
 }
+
 
 - (void)dealloc
 {
