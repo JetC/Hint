@@ -14,7 +14,6 @@
 @interface SFHistoryViewController ()
 
 @property (nonatomic,strong) UITableView *timeLineTableView;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 @end
 

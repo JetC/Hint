@@ -228,12 +228,8 @@
 
 - (void)setupFriendsListDelegate
 {
-    SFRennFriendsListDelegate *fetchingFriendsListManager = [[SFRennFriendsListDelegate alloc]init];
     self.friendsListArray = [[NSMutableArray alloc]init];
-    self.friendsListDelegate = fetchingFriendsListManager;
-    self.friendsListArray = self.friendsListDelegate.friendsListArray;
-    self.friendsListDelegate.settingViewController = self;
-    
+    self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsListArray;
 }
 
 - (void)rennLogoutSuccess

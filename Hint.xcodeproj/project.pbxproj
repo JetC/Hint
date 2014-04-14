@@ -26,6 +26,8 @@
 		DF42D5CA18E0524C002E82CA /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DF42D5C218E0524C002E82CA /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DF42D5CB18E0524C002E82CA /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DF42D5C418E0524C002E82CA /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DF42D5CC18E0524C002E82CA /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = DF42D5C618E0524C002E82CA /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DF58665018FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF58664E18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m */; };
+		DF58665118FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF58664F18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib */; };
 		DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */; };
 		DF6269B118D5D3B700A614CB /* SFHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */; };
 		DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80505B18D47984009D6103 /* SFSettingViewController.m */; };
@@ -84,6 +86,9 @@
 		DF42D5C418E0524C002E82CA /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		DF42D5C518E0524C002E82CA /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		DF42D5C618E0524C002E82CA /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		DF58664D18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAddingNewItemTableViewCell.h; sourceTree = "<group>"; };
+		DF58664E18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAddingNewItemTableViewCell.m; sourceTree = "<group>"; };
+		DF58664F18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFAddingNewItemTableViewCell.xib; sourceTree = "<group>"; };
 		DF6269AA18D5D30E00A614CB /* SFHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryTableViewCell.h; sourceTree = "<group>"; };
 		DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryTableViewCell.m; sourceTree = "<group>"; };
 		DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFHistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -282,6 +287,9 @@
 				DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */,
 				DF80520B18D55126009D6103 /* SFAddingNewItemViewController.h */,
 				DF80520C18D55126009D6103 /* SFAddingNewItemViewController.m */,
+				DF58664D18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.h */,
+				DF58664E18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m */,
+				DF58664F18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib */,
 			);
 			name = AddLovingPerson;
 			sourceTree = "<group>";
@@ -377,6 +385,7 @@
 			files = (
 				DF09154E18D455460084B562 /* Images.xcassets in Resources */,
 				DF09154018D455460084B562 /* InfoPlist.strings in Resources */,
+				DF58665118FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib in Resources */,
 				DF6269B118D5D3B700A614CB /* SFHistoryTableViewCell.xib in Resources */,
 				DF09154918D455460084B562 /* MainStoryBoard.storyboard in Resources */,
 				DF80520418D53045009D6103 /* RennSDK.bundle in Resources */,
@@ -403,6 +412,7 @@
 				DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */,
 				DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */,
 				DF42D5CB18E0524C002E82CA /* SBJsonParser.m in Sources */,
+				DF58665018FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m in Sources */,
 				DF42D5CA18E0524C002E82CA /* SBJsonBase.m in Sources */,
 				DF42D5CC18E0524C002E82CA /* SBJsonWriter.m in Sources */,
 				DF80520A18D54BD3009D6103 /* SFTabBarController.m in Sources */,

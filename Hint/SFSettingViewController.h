@@ -19,7 +19,7 @@
 
 
 - (IBAction)login:(id)sender;
-- (IBAction)fetchFriendsList:(id)sender;
+//- (IBAction)fetchFriendsList:(id)sender;
 
 
 

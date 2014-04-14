@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFAddingNewItemViewController : UIViewController
+@interface SFAddingNewItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

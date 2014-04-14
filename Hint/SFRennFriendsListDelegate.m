@@ -7,12 +7,13 @@
 //
 
 #import "SFRennFriendsListDelegate.h"
-#import "SFRennFriendsListWithTag+ ListUserFriendParam.h"
+//#import "SFRennFriendsListWithTag+ ListUserFriendParam.h"
 #import "SBJSON.h"
 
 @interface SFRennFriendsListDelegate ()
 
 @property (nonatomic, strong)NSMutableArray *mArray;
+//@property (nonatomic, strong)NSInteger times;
 
 @end
 
@@ -27,6 +28,16 @@
     return self;
 }
 
++ (instancetype)sharedManager
+{
+    static SFRennFriendsListDelegate *sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[self alloc]init];
+    });
+    return sharedManager;
+}
+
 - (void)loadListForTheTime:(NSUInteger)timeLoaded
 {
     static NSUInteger i = 1;
@@ -34,11 +45,13 @@
     {
         for (i = 1+10*(timeLoaded-1); i<= 10+10*(timeLoaded-1); i++)
         {
-            SFRennFriendsListWithTag__ListUserFriendParam *param = [[SFRennFriendsListWithTag__ListUserFriendParam alloc] init];
+            ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
             param.userId = [RennClient uid];
             param.pageNumber = i;
             param.pageSize = 100;
-            param.tag = @"1";
+            
+//            以后需要时候直接导入头文件，改param的原始类为SFRennFriendsListWithTag+ ListUserFriendParam即可
+//            param.tag = @"1";
             [RennClient sendAsynRequest:param delegate:self];
         }
     }
@@ -50,10 +63,12 @@
 
 - (void)rennService:(RennService *)service requestSuccessWithResponse:(id)response
 {
-    NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
+//    NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
     self.mArray = response;
     
-    NSLog(@"%i",_mArray.count);
+    static NSInteger timesProcessed = 0;
+    timesProcessed++;
+    NSLog(@"self.friendsListArray.count:  %lu  /n  timesProcessed:%li",(unsigned long)self.friendsListArray.count,(long)timesProcessed);
     
     if (_mArray.count == 0)
     {
@@ -63,7 +78,6 @@
     {
         [self serializingResponse];
     }
-    
     
 }
 
@@ -82,9 +96,7 @@
         NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
         if ([self.mArray count] > i)
         {
-            
             [tmpArray addObject:[self.mArray objectAtIndex:i]];
-            
             NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
             [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
         }

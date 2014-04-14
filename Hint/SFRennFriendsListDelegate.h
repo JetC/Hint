@@ -9,10 +9,12 @@
 #import <RennSDK/RennSDK.h>
 #import "SFSettingViewController.h"
 
-@interface SFRennFriendsListDelegate : RennClient
+@interface SFRennFriendsListDelegate : ListUserFriendParam
+
 @property (strong, nonatomic) NSMutableArray *friendsListArray;
 @property BOOL hasLoadingFriendsListFinished;
-@property (nonatomic, weak)SFSettingViewController *settingViewController;
 
+
++(instancetype)sharedManager;
 
 @end
