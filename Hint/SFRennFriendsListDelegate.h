@@ -15,6 +15,6 @@
 @property BOOL hasLoadingFriendsListFinished;
 
 
-+(instancetype)sharedManager;
++ (instancetype)sharedManager;
 
 @end

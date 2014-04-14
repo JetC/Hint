@@ -56,6 +56,7 @@
     if (self.friendsListArray.count == 0)
     {
         NSLog(@"Array is Nil!");
+        [SFRennFriendsListDelegate sharedManager];
     }
     else
     {
@@ -78,7 +79,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"SFAddingNewItemTableViewCell";
-    SFAddingNewItemTableViewCell *cell = [[SFAddingNewItemTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    SFAddingNewItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell)
     {
         cell = [[SFAddingNewItemTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];

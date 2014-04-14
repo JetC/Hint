@@ -72,7 +72,7 @@
     
     if (_mArray.count == 0)
     {
-        self.hasLoadingFriendsListFinished = YES;
+
     }
     else
     {
