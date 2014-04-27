@@ -78,6 +78,12 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.friendsListArray.count == 0)
+    {
+        self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsListArray;
+        [self.theNewItemTableView reloadData];
+    }
+    
     static NSString *cellIdentifier = @"SFAddingNewItemTableViewCell";
     SFAddingNewItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell)

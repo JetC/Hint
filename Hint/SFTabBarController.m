@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tabBar.backgroundImage = [UIImage imageNamed:@"2.jpg"];
+//    self.tabBar.backgroundImage = [UIImage imageNamed:@"2.jpg"];
     self.tabBar.translucent = NO;
     self.tabBar.selectedImageTintColor = UIColorFromRGB(0xd95058);
 }

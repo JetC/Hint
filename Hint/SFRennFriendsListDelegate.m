@@ -63,8 +63,9 @@
 
 - (void)rennService:(RennService *)service requestSuccessWithResponse:(id)response
 {
-//    NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
+    NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
     self.mArray = response;
+    NSLog(@"%@",_mArray);
     
     static NSInteger timesProcessed = 0;
     timesProcessed++;
