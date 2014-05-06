@@ -20,6 +20,7 @@
 		DF09155718D455460084B562 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF09153918D455460084B562 /* UIKit.framework */; };
 		DF09155F18D455460084B562 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF09155D18D455460084B562 /* InfoPlist.strings */; };
 		DF09156118D455460084B562 /* HintTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09156018D455460084B562 /* HintTests.m */; };
+		DF34CB9E19192319008EEED8 /* SFRennFetchUserInfoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF34CB9D19192319008EEED8 /* SFRennFetchUserInfoDelegate.m */; };
 		DF42D5C718E0524C002E82CA /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DF42D5BC18E0524C002E82CA /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DF42D5C818E0524C002E82CA /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DF42D5BE18E0524C002E82CA /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DF42D5C918E0524C002E82CA /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = DF42D5C018E0524C002E82CA /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -73,6 +74,8 @@
 		DF09155C18D455460084B562 /* HintTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HintTests-Info.plist"; sourceTree = "<group>"; };
 		DF09155E18D455460084B562 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DF09156018D455460084B562 /* HintTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HintTests.m; sourceTree = "<group>"; };
+		DF34CB9C19192319008EEED8 /* SFRennFetchUserInfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFRennFetchUserInfoDelegate.h; sourceTree = "<group>"; };
+		DF34CB9D19192319008EEED8 /* SFRennFetchUserInfoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFRennFetchUserInfoDelegate.m; sourceTree = "<group>"; };
 		DF42D5BA18E0524C002E82CA /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		DF42D5BB18E0524C002E82CA /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		DF42D5BC18E0524C002E82CA /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -274,6 +277,8 @@
 				DF80505B18D47984009D6103 /* SFSettingViewController.m */,
 				DF9114BB18E5BF540051B4C0 /* SFRennFriendsListDelegate.h */,
 				DF9114BC18E5BF540051B4C0 /* SFRennFriendsListDelegate.m */,
+				DF34CB9C19192319008EEED8 /* SFRennFetchUserInfoDelegate.h */,
+				DF34CB9D19192319008EEED8 /* SFRennFetchUserInfoDelegate.m */,
 				DF8ECCA218F848450040B044 /* SFRennFriendsListWithTag+ ListUserFriendParam.h */,
 				DF8ECCA318F848450040B044 /* SFRennFriendsListWithTag+ ListUserFriendParam.m */,
 			);
@@ -411,6 +416,7 @@
 				DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */,
 				DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */,
 				DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */,
+				DF34CB9E19192319008EEED8 /* SFRennFetchUserInfoDelegate.m in Sources */,
 				DF42D5CB18E0524C002E82CA /* SBJsonParser.m in Sources */,
 				DF58665018FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m in Sources */,
 				DF42D5CA18E0524C002E82CA /* SBJsonBase.m in Sources */,

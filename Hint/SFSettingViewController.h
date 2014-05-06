@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SFRennFetchUserInfoDelegate.h"
 
 @interface SFSettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RennLoginDelegate>
 
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *pushNotificationSwitcher;
 @property (nonatomic, strong) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *friendsListArray;
+@property (strong, nonatomic) SFRennFetchUserInfoDelegate *rennFetchUserInfoDelegate;
 
 
 

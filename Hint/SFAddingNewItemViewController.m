@@ -62,7 +62,14 @@
     {
         [self.theNewItemTableView reloadData];
     }
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
+}
+
+- (void)reloadTableViewData
+{
+    [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+        [_theNewItemTableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning

@@ -56,7 +56,7 @@
                     secretKey:@"6d407586023f4db996cc243fa1e4e8f6"];
     
     [RennClient setScope:@"read_user_blog,read_user_checkin,read_user_feed,read_user_guestbook,read_user_invitation,read_user_like_history,read_user_message,read_user_notification,read_user_photo,read_user_status,read_user_album,read_user_comment,read_user_share,read_user_request,publish_blog,publish_checkin,publish_feed,publish_share,write_guestbook,send_invitation,send_request,send_message,send_notification,photo_upload,status_update,create_album,publish_comment,operate_like,admin_page"];
-    
+    [RennClient setTokenType:@"mac"];
     if ([RennClient isLogin])
     {
         self.renRenConnectionStatusLabel.text = @"要注销吗？点击下面按钮";
@@ -70,6 +70,7 @@
 //    self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
 //    self.friendsListArray = self.friendsListDelegate.friendsListArray;
 //    self.friendsListDelegate.settingViewController = self;
+    _rennFetchUserInfoDelegate = [[SFRennFetchUserInfoDelegate alloc]init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,7 +160,7 @@
         {
             GetUserParam *param = [[GetUserParam alloc] init] ;
             param.userId = [RennClient uid];
-            [RennClient sendAsynRequest:param delegate:self];
+            [RennClient sendAsynRequest:param delegate:_rennFetchUserInfoDelegate];
         }
             break;
         case 3:
@@ -169,9 +170,9 @@
             break;
         case 4:
         {
-            ListUserFriendAppParam *param = [[ListUserFriendAppParam alloc] init];
-            [RennClient sendAsynRequest:param delegate:self];
-            
+//            ListUserFriendAppParam *param = [[ListUserFriendAppParam alloc] init];
+//            [RennClient sendAsynRequest:param delegate:self];
+
         }
             break;
         case 5:
@@ -186,8 +187,8 @@
             break;
         case 7:
         {
-            GetUserLoginParam *param = [[GetUserLoginParam alloc] init];
-            [RennClient sendAsynRequest:param delegate:self];
+//            GetUserLoginParam *param = [[GetUserLoginParam alloc] init];
+//            [RennClient sendAsynRequest:param delegate:self];
         }
             break;
         case 8:
@@ -245,5 +246,7 @@
     [RennClient cancelForDelegate:self];
 
 }
+
+
 
 @end

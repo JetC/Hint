@@ -16,7 +16,7 @@
 @interface SFRennFriendsListDelegate ()
 
 
-@property (nonatomic, strong)NSMutableArray *mArray;
+//@property (nonatomic, strong)NSMutableArray *mArray;
 @property BOOL needToLoadAgain;
 @property NSInteger timesFriendsListLoaded;
 
@@ -66,18 +66,18 @@
 {
 //    NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
 //    NSLog(@"%@",_mArray);
-
-    self.mArray = response;
+    NSMutableArray *arrayForResponse = [[NSMutableArray alloc]init];
+    arrayForResponse = response;
     static NSInteger timesProcessed = 0;
     timesProcessed++;
     NSLog(@"self.friendsListArray.count:  %lu  /n  timesProcessed:%li\n\n\n\n",(unsigned long)self.friendsListArray.count,(long)timesProcessed);
     
-    if (_mArray.count != 0)
+    if (arrayForResponse.count != 0)
     {
-        [self serializingResponse];
+        [self serializingResponseArray:arrayForResponse];
     }
 
-    if (_mArray.count != kPageSize)
+    if (arrayForResponse.count != kPageSize)
     {
         _needToLoadAgain = NO;
     }
@@ -97,13 +97,13 @@
     NSLog(@"requestFailWithError:Error Domain = %@, Error Code = %@", domain, code);
 }
 
-- (void)serializingResponse
+- (void)serializingResponseArray:(NSMutableArray *)arrayForResponse
 {
     NSInteger i;
-    for (i = 0; i<_mArray.count ; i++)
+    for (i = 0; i<arrayForResponse.count ; i++)
     {
         NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
-        [tmpArray addObject:[self.mArray objectAtIndex:i]];
+        [tmpArray addObject:[arrayForResponse objectAtIndex:i]];
         NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
         [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
 
@@ -119,6 +119,7 @@
     else
     {
         NSLog(@"结束啦！");
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadTableViewData" object:nil];
     }
 }
 @end
