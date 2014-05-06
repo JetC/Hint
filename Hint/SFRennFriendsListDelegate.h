@@ -11,9 +11,8 @@
 
 @interface SFRennFriendsListDelegate : ListUserFriendParam
 
-@property (strong, nonatomic) NSMutableArray *friendsListArray;
-@property BOOL hasLoadingFriendsListFinished;
 
+@property (strong, nonatomic) NSMutableArray *friendsListArray;
 
 + (instancetype)sharedManager;
 

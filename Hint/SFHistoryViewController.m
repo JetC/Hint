@@ -13,12 +13,11 @@
 
 @interface SFHistoryViewController ()
 
-@property (nonatomic,strong) UITableView *timeLineTableView;
+@property (weak, nonatomic) IBOutlet UITableView *timeLineTableView;
 
 @end
 
 @implementation SFHistoryViewController
-@synthesize timeLineTableView = _timeLineTableView;
 
 
 
@@ -36,7 +35,6 @@
 //老黄说这里没问题
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.timeLineTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kNavigationBarWithStatusBarHeight, 320, SCREEN_HEIGHT) ];
     [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
     self.timeLineTableView.dataSource = self;
     self.timeLineTableView.delegate = self;

@@ -92,7 +92,7 @@
     }
     cell.nameLabel.text = [self.friendsListArray objectAtIndex:indexPath.row];
     NSLog(@"%@",[self.friendsListArray objectAtIndex:indexPath.row]);
-    NSLog(@"%i:%@",indexPath.row,cell.nameLabel.text);
+    NSLog(@"%li:%@",(long)indexPath.row,cell.nameLabel.text);
     return cell;
 }
 

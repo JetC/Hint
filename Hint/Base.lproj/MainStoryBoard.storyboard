@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="hRZ-b8-wz4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="hRZ-b8-wz4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -45,8 +45,8 @@
             <objects>
                 <viewController id="uRA-r7-t4H" customClass="SFAddingNewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3Xt-d1-czW"/>
-                        <viewControllerLayoutGuide type="bottom" id="oUR-QF-GMI"/>
+                        <viewControllerLayoutGuide type="top" id="OTZ-2D-NJZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wog-C4-04o"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="D83-gA-2cT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -80,8 +80,8 @@
             <objects>
                 <viewController id="yKf-gj-gPX" customClass="SFSettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wU5-nd-FdG"/>
-                        <viewControllerLayoutGuide type="bottom" id="go7-FG-gHe"/>
+                        <viewControllerLayoutGuide type="top" id="Z2D-2D-aBr"/>
+                        <viewControllerLayoutGuide type="bottom" id="KXF-Z4-oMJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l8S-Nk-hVq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -160,15 +160,25 @@
             <objects>
                 <viewController id="GOk-6V-3EV" customClass="SFHistoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5sj-fj-FNE"/>
-                        <viewControllerLayoutGuide type="bottom" id="znw-Pa-14B"/>
+                        <viewControllerLayoutGuide type="top" id="2RV-rU-9ur"/>
+                        <viewControllerLayoutGuide type="bottom" id="QkL-Gy-Btf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Isv-6O-HZC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OgH-eB-x3n">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="历史信息" id="zaz-GE-sW8"/>
+                    <connections>
+                        <outlet property="timeLineTableView" destination="OgH-eB-x3n" id="hoN-BD-mcI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ksf-vg-FWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
