@@ -25,6 +25,9 @@
     arrayForResponse = response;
     self.currentUserName = [arrayForResponse objectForKey:@"name"];
     self.currentUserID = [arrayForResponse objectForKey:@"id"];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.currentUserID forKey:@"currentUserID"];
+    [userDefaults setObject:self.currentUserName forKey:@"currentUserName"];
 }
 
 @end

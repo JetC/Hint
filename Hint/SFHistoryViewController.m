@@ -108,11 +108,10 @@
 }
 
 
-
 //调整行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 64;
+    return 84;
 }
 
 @end

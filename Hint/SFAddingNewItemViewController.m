@@ -46,7 +46,10 @@
 
     [[SFRennFriendsListDelegate sharedManager] loadListForTheTime:1];
     self.rennFetchUserInfoDelegate = [[SFRennFetchUserInfoDelegate alloc]init];
+
     [self.rennFetchUserInfoDelegate loadCurrentUserInfo];
+    [self checkUserInfo];
+        [self checkLovingPersonHistory];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"currentUserInfoLoaded" object:nil];
@@ -87,7 +90,7 @@
         cell.iconImageView.image = [[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"iconImage"];
     }
 
-    NSLog(@"IndexPath.row : %d",indexPath.row);
+    NSLog(@"IndexPath.row : %ld",(long)indexPath.row);
     NSLog(@"Now On Screen: %li",(long)indexPath.row);
     return cell;
 }
@@ -99,8 +102,6 @@
 
 - (void)sendLovingHintOfUserID:(NSString *)lovingUserID
 {
-//    if (self.hasCurrentUserInfoLoaded == YES)
-//    {
     NSURL *url = [NSURL URLWithString:@"http://192.168.1.185/newlover"];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     NSString *params = [NSString stringWithFormat:@"hint_id=%@&lover_id=%@",self.rennFetchUserInfoDelegate.currentUserID,lovingUserID];
@@ -112,7 +113,11 @@
     {
         if(error == nil)
         {
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            [userDefaults setValue:[infoRecieved objectForKey:@"hint_loved_num"] forKey:@"numberUserBeLoved"];
+            [userDefaults setValue:[infoRecieved objectForKey:@"hint_have_love_num"] forKey:@"numberUserLoved"];
+
             NSString *loverName;
             for (id personInfo in [SFRennFriendsListDelegate sharedManager].friendsListInfoArray)
             {
@@ -122,6 +127,9 @@
                 }
 
             }
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLovingNumbers" object:nil];
+
 
             [self notifyUserAfterClickedLoverWithloverName:loverName
                                                      Match:[[infoRecieved objectForKey:@"match"] integerValue]
@@ -193,8 +201,9 @@
     }
     else
     {
-        matchInfo = [NSString stringWithFormat:@"你喜欢的%@妹子目前已经有%d 个人暗暗喜欢了哟\n 还不快快行动？",loverName,loverBeloved];
+        matchInfo = [NSString stringWithFormat:@"你喜欢的%@妹子目前已经有%ld 个人暗暗喜欢了哟\n 还不快快动?",loverName,(long)loverBeloved];
     }
+
     [self showAlertViewWithTitle:@"结果" message:matchInfo cancelButtonTitle:nil];
 }
 
@@ -214,10 +223,55 @@
     }];
 }
 
+- (void)checkUserInfo
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+    NSURL *url = [NSURL URLWithString:@"http://192.168.1.185/updata"];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    NSString *params = [NSString stringWithFormat:@"hint_id=%@",[userDefaults objectForKey:@"currentUserID"]];
+    NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
+    [urlRequest setHTTPBody:data];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLSessionDataTask * dataTask = [self.session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        if(error == nil)
+        {
+            NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSString *numberUserLoved;
+            NSString *numberUserBeLoved;
+            numberUserLoved = [infoRecieved objectForKey:@"hint_have_love_num"];
+            numberUserBeLoved = [infoRecieved objectForKey:@"hint_loved_num"];
+            [userDefaults setObject:numberUserLoved forKey:@"numberUserLoved"];
+            [userDefaults setObject:numberUserLoved forKey:@"numberUserBeLoved"];
+        }
+    }];
+    [dataTask resume];
+}
+
+- (void)checkLovingPersonHistory
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+    NSURL *url = [NSURL URLWithString:@"http://192.168.1.185/havelove"];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    NSString *params = [NSString stringWithFormat:@"user_id=%@",[userDefaults objectForKey:@"currentUserID"]];
+    NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
+    [urlRequest setHTTPBody:data];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLSessionDataTask * dataTask = [self.session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        if(error == nil)
+        {
+            NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        }
+    }];
+    [dataTask resume];
 
 
-
-
+}
 
 
 

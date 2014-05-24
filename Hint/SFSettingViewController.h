@@ -9,19 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "SFRennFetchUserInfoDelegate.h"
 
-@interface SFSettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RennLoginDelegate>
+@interface SFSettingViewController : UIViewController<RennLoginDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *renRenConnectionStatusLabel;
 @property (weak, nonatomic) IBOutlet UIButton *renRenLoginButton;
-@property (weak, nonatomic) IBOutlet UISwitch *pushNotificationSwitcher;
-@property (nonatomic, strong) UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *friendsListArray;
-@property (strong, nonatomic) SFRennFetchUserInfoDelegate *rennFetchUserInfoDelegate;
 
 
 
 - (IBAction)login:(id)sender;
-//- (IBAction)fetchFriendsList:(id)sender;
 
 
 

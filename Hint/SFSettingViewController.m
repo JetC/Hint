@@ -14,13 +14,14 @@
 @interface SFSettingViewController ()
 
 @property (strong, nonatomic)SFRennFriendsListDelegate *friendsListDelegate;
+@property (weak, nonatomic) IBOutlet UILabel *userBelovedCount;
+@property (weak, nonatomic) IBOutlet UILabel *userLovedCount;
 
 @end
 
 @implementation SFSettingViewController
 @synthesize renRenConnectionStatusLabel = _renRenConnectionStatusLabel;
 @synthesize renRenLoginButton = _renRenLoginButton;
-@synthesize tableView = _tableView;
 
 
 
@@ -42,10 +43,7 @@
     {
         self.view.frame = CGRectMake(0, 0, 320, 548);
     }
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 194, 320, self.view.frame.size.height-44-120) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.view addSubview:self.tableView];
+
 }
 
 - (void)viewDidLoad
@@ -65,7 +63,12 @@
         [RennClient loginWithDelegate:self];
     }
 
-    _rennFetchUserInfoDelegate = [[SFRennFetchUserInfoDelegate alloc]init];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.userBelovedCount.text = [userDefaults stringForKey:@"numberUserBeLoved"];
+    NSLog(@"%@",[userDefaults stringForKey:@"numberUserBeLoved"]);
+    self.userLovedCount.text = [userDefaults stringForKey:@"numberUserLoved"];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshLovingNumbers) name:@"refreshLovingNumbers" object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,116 +89,6 @@
 */
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 9;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger row = indexPath.row;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"testCell"];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"testCell"];
-        cell.textLabel.font = [UIFont systemFontOfSize:16.0];
-    }
-    switch (row) {
-        case 0:
-            cell.textLabel.text = @"批量获取用户信息";
-            break;
-        case 1:
-            cell.textLabel.text = @"以分页的方式获取某个用户与当前登录用户的共同好友";
-            break;
-        case 2:
-            cell.textLabel.text = @"获取用户信息";
-            break;
-        case 3:
-            cell.textLabel.text = @"获取某个用户的好友列表";
-            break;
-        case 4:
-            cell.textLabel.text = @"获取当前登录用户在某个应用里的好友列表";
-            break;
-        case 5:
-            cell.textLabel.text = @"验证登录是否过期";
-            break;
-        case 6:
-            cell.textLabel.text = @"验证登录是否有效";
-            break;
-        case 7:
-            cell.textLabel.text = @"获取登录信息";
-            break;
-        case 8:
-            cell.textLabel.text = @"获取未安装该应用好友列表";
-        default:
-            break;
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger row = indexPath.row;
-    switch (row) {
-        case 0:
-        {
-            BatchUserParam *param = [[BatchUserParam alloc] init];
-            param.userIds = [NSArray arrayWithObjects:[RennClient uid], nil];
-            [RennClient sendAsynRequest:param delegate:self];
-        }
-            break;
-        case 1:
-        {
-            ListUserFriendMutualParam *param = [[ListUserFriendMutualParam alloc] init] ;
-            param.userId = [RennClient uid];
-            [RennClient sendAsynRequest:param delegate:self];
-        }
-            break;
-        case 2:
-        {
-            GetUserParam *param = [[GetUserParam alloc] init] ;
-            param.userId = [RennClient uid];
-            [RennClient sendAsynRequest:param delegate:_rennFetchUserInfoDelegate];
-        }
-            break;
-        case 3:
-        {
-            [self setupFriendsListDelegate];
-        }
-            break;
-        case 4:
-        {
-//            ListUserFriendAppParam *param = [[ListUserFriendAppParam alloc] init];
-//            [RennClient sendAsynRequest:param delegate:self];
-
-        }
-            break;
-        case 5:
-        {
-            //            AppLog(@"过期:%@",[RennClient isAuthorizeExpired] ? @"YES":@"NO");
-        }
-            break;
-        case 6:
-        {
-            //            AppLog(@"有效:%@",[RennClient isAuthorizeValid] ? @"YES":@"NO");
-        }
-            break;
-        case 7:
-        {
-//            GetUserLoginParam *param = [[GetUserLoginParam alloc] init];
-//            [RennClient sendAsynRequest:param delegate:self];
-        }
-            break;
-        case 8:
-        {
-            //            ListUserFriendUninstallAppParam *param = [[[ListUserFriendUninstallAppParam alloc] init] autorelease];
-            //            [RennClient sendAsynRequest:param delegate:self];
-        }
-            break;
-        default:
-            break;
-    }
-}
 
 
 - (IBAction)login:(id)sender
@@ -240,6 +133,16 @@
     self.renRenLoginButton = nil;
     [RennClient cancelForDelegate:self];
 
+}
+
+- (void)refreshLovingNumbers
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+        self.userBelovedCount.text = [userDefaults stringForKey:@"numberUserBeLoved"];
+        NSLog(@"%@",[userDefaults stringForKey:@"numberUserBeLoved"]);
+        self.userLovedCount.text = [userDefaults stringForKey:@"numberUserLoved"];
+    }];
 }
 
 
