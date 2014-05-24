@@ -29,7 +29,6 @@
 		DF42D5CC18E0524C002E82CA /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = DF42D5C618E0524C002E82CA /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DF58665018FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF58664E18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m */; };
 		DF58665118FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF58664F18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib */; };
-		DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */; };
 		DF6269B118D5D3B700A614CB /* SFHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */; };
 		DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF80505B18D47984009D6103 /* SFSettingViewController.m */; };
 		DF80512E18D47FD2009D6103 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DF80512D18D47FD2009D6103 /* libsqlite3.0.dylib */; };
@@ -41,6 +40,8 @@
 		DF8ECCA418F848450040B044 /* SFRennFriendsListWithTag+ ListUserFriendParam.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8ECCA318F848450040B044 /* SFRennFriendsListWithTag+ ListUserFriendParam.m */; };
 		DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF9114BC18E5BF540051B4C0 /* SFRennFriendsListDelegate.m */; };
 		DF91321218DD20AA008251DD /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF91321018DD20AA008251DD /* Reveal.framework */; };
+		DFB0014B1930FA130078A221 /* SFHistoryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB0014A1930FA130078A221 /* SFHistoryCollectionViewController.m */; };
+		DFB0014E1930FAC70078A221 /* SFHistoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB0014D1930FAC70078A221 /* SFHistoryCollectionViewCell.m */; };
 		DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */; };
 		DFF109C118DDD3A7003F3D57 /* SFSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */; };
 		DFF109C418DDD3D6003F3D57 /* SFAddingItemNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */; };
@@ -92,8 +93,6 @@
 		DF58664D18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAddingNewItemTableViewCell.h; sourceTree = "<group>"; };
 		DF58664E18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAddingNewItemTableViewCell.m; sourceTree = "<group>"; };
 		DF58664F18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFAddingNewItemTableViewCell.xib; sourceTree = "<group>"; };
-		DF6269AA18D5D30E00A614CB /* SFHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryTableViewCell.h; sourceTree = "<group>"; };
-		DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryTableViewCell.m; sourceTree = "<group>"; };
 		DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		DF80505A18D47984009D6103 /* SFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingViewController.h; sourceTree = "<group>"; };
 		DF80505B18D47984009D6103 /* SFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSettingViewController.m; sourceTree = "<group>"; };
@@ -111,6 +110,10 @@
 		DF9114BB18E5BF540051B4C0 /* SFRennFriendsListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFRennFriendsListDelegate.h; sourceTree = "<group>"; };
 		DF9114BC18E5BF540051B4C0 /* SFRennFriendsListDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFRennFriendsListDelegate.m; sourceTree = "<group>"; };
 		DF91321018DD20AA008251DD /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		DFB001491930FA130078A221 /* SFHistoryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryCollectionViewController.h; sourceTree = "<group>"; };
+		DFB0014A1930FA130078A221 /* SFHistoryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryCollectionViewController.m; sourceTree = "<group>"; };
+		DFB0014C1930FAC70078A221 /* SFHistoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryCollectionViewCell.h; sourceTree = "<group>"; };
+		DFB0014D1930FAC70078A221 /* SFHistoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryCollectionViewCell.m; sourceTree = "<group>"; };
 		DFF109BC18DDCD9F003F3D57 /* SFHistoryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryNavigationController.h; sourceTree = "<group>"; };
 		DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryNavigationController.m; sourceTree = "<group>"; };
 		DFF109BF18DDD3A7003F3D57 /* SFSettingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingNavigationController.h; sourceTree = "<group>"; };
@@ -261,8 +264,10 @@
 				DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */,
 				DF80520E18D557DD009D6103 /* SFHistoryViewController.h */,
 				DF80520F18D557DD009D6103 /* SFHistoryViewController.m */,
-				DF6269AA18D5D30E00A614CB /* SFHistoryTableViewCell.h */,
-				DF6269AB18D5D30E00A614CB /* SFHistoryTableViewCell.m */,
+				DFB001491930FA130078A221 /* SFHistoryCollectionViewController.h */,
+				DFB0014A1930FA130078A221 /* SFHistoryCollectionViewController.m */,
+				DFB0014C1930FAC70078A221 /* SFHistoryCollectionViewCell.h */,
+				DFB0014D1930FAC70078A221 /* SFHistoryCollectionViewCell.m */,
 				DF6269B018D5D3B700A614CB /* SFHistoryTableViewCell.xib */,
 			);
 			name = HistoryView;
@@ -414,7 +419,6 @@
 			files = (
 				DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */,
 				DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */,
-				DF6269AC18D5D30E00A614CB /* SFHistoryTableViewCell.m in Sources */,
 				DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */,
 				DF34CB9E19192319008EEED8 /* SFRennFetchUserInfoDelegate.m in Sources */,
 				DF42D5CB18E0524C002E82CA /* SBJsonParser.m in Sources */,
@@ -425,9 +429,11 @@
 				DF42D5C918E0524C002E82CA /* SBJSON.m in Sources */,
 				DF09154218D455460084B562 /* main.m in Sources */,
 				DF8ECCA418F848450040B044 /* SFRennFriendsListWithTag+ ListUserFriendParam.m in Sources */,
+				DFB0014B1930FA130078A221 /* SFHistoryCollectionViewController.m in Sources */,
 				DF42D5C718E0524C002E82CA /* NSObject+SBJSON.m in Sources */,
 				DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */,
 				DF80520D18D55126009D6103 /* SFAddingNewItemViewController.m in Sources */,
+				DFB0014E1930FAC70078A221 /* SFHistoryCollectionViewCell.m in Sources */,
 				DF09154618D455460084B562 /* SFAppDelegate.m in Sources */,
 				DFF109C418DDD3D6003F3D57 /* SFAddingItemNavigationController.m in Sources */,
 				DF42D5C818E0524C002E82CA /* NSString+SBJSON.m in Sources */,

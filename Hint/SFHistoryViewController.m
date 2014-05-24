@@ -7,13 +7,13 @@
 //
 
 #import "SFHistoryViewController.h"
-#import "SFHistoryTableViewCell.h"
+#import "SFRennFriendsListDelegate.h"
 #warning 把.pch里面的人人SDK放到合适的文件里
 
 
 @interface SFHistoryViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *timeLineTableView;
+@property (strong, nonatomic) NSMutableArray *lovedPeopleIconImageArray;
 
 @end
 
@@ -35,17 +35,17 @@
 //老黄说这里没问题
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.timeLineTableView registerNib:[UINib nibWithNibName:@"SFHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFHistoryTableViewCell"];
-    self.timeLineTableView.dataSource = self;
-    self.timeLineTableView.delegate = self;
-    
-    self.timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
+    self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
+//    [self loadLovedPeopleIcons];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"iconsLoadingFinished" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"historyFinished" object:nil];
+
+
     
-    [self.view addSubview:self.timeLineTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,64 +54,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)loadLovedPeopleIcons
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark TableView
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-//FIXME:应该为return  count类型，随时变化
-    return 323;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellIdentifier = @"SFHistoryTableViewCell";
-    SFHistoryTableViewCell *cell = [self.timeLineTableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil)
+    if (self.lovedPeopleIconImageArray == nil)
     {
-        cell = [[SFHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
     }
-
-//TODO:查这两句的意思
-//    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:cellIdentifier owner:nil options:nil];
-//    cell = [nib objectAtIndex:0];
-    if (indexPath.row % 2 == 0)
+    for (NSString *lovedPeopleID in [SFRennFriendsListDelegate sharedManager].lovedPeopleIDArray)
     {
-        cell.imageOnTableCell.image = [UIImage imageNamed:@"Timeline Number Background"];
+        for (id friendInfo in [SFRennFriendsListDelegate sharedManager].friendsListInfoArray)
+        {
+            if ([[friendInfo objectForKey:@"id"] isEqualToString:lovedPeopleID])
+            {
+                [self.lovedPeopleIconImageArray addObject:[friendInfo objectForKey:@"iconImage"]];
+            }
+        }
     }
-    else
-    {
-        cell.imageOnTableCell.image = [UIImage imageNamed:@"Timeline Number Background"];
-    }
-    
-    cell.labelOnTableCell.text = [NSString stringWithFormat:@"Test %ld",(long)indexPath.row];
-    
-
-    return cell;
-    
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-
-//调整行高
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 84;
-}
 
 @end

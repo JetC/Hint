@@ -36,8 +36,11 @@
     self = [super init];
 
     self.friendsListInfoArray = [[NSMutableArray alloc]init];
+    self.lovedPeopleIDArray = [[NSMutableArray alloc]init];
 
     [self setupUrlSession];
+
+
 
     _needToLoadAgain = YES;
     _timesFriendsListLoaded = 0;
@@ -163,6 +166,7 @@
             {
                 static NSInteger iconLoaded = 0;
                 NSLog(@"response.URL:%@",response.URL);
+
                 for (NSMutableDictionary *personInfo in self.friendsListInfoArray)
                 {
                     if ([[personInfo objectForKey:@"iconImageUrl"] isEqualToString:[response.URL absoluteString]])
@@ -183,7 +187,7 @@
                         }
                     }
                     self.hasIconLoadingFinished = YES;
-                    [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadTableViewData" object:nil];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"iconsLoadingFinished" object:nil];
                     
                 }
             }

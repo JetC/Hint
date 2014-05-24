@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFHistoryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface SFHistoryViewController : UIViewController
 
 
 

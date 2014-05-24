@@ -237,28 +237,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OgH-eB-x3n">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y8n-t9-mo1" customClass="SFHistoryCollectionViewController">
+                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="GOk-6V-3EV" id="Luk-8S-QwE"/>
-                                    <outlet property="delegate" destination="GOk-6V-3EV" id="vT5-ey-I1M"/>
-                                </connections>
-                            </tableView>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bFQ-WM-RE7">
+                                    <size key="itemSize" width="85" height="87"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="CZg-ng-fIH" customClass="SFHistoryCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="64" width="85" height="87"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="85" height="87"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zPm-vv-NsI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="85" height="87"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="zPm-vv-NsI" firstAttribute="top" secondItem="CZg-ng-fIH" secondAttribute="top" id="MfV-jw-Acw"/>
+                                            <constraint firstAttribute="bottom" secondItem="zPm-vv-NsI" secondAttribute="bottom" id="OL9-t9-7iG"/>
+                                            <constraint firstItem="zPm-vv-NsI" firstAttribute="leading" secondItem="CZg-ng-fIH" secondAttribute="leading" id="btd-rl-7eM"/>
+                                            <constraint firstAttribute="trailing" secondItem="zPm-vv-NsI" secondAttribute="trailing" id="lmO-Bk-75Y"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="zPm-vv-NsI" id="Vjc-Qv-u99"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OgH-eB-x3n" secondAttribute="trailing" id="2fh-b9-16F"/>
-                            <constraint firstItem="OgH-eB-x3n" firstAttribute="top" secondItem="Isv-6O-HZC" secondAttribute="top" id="59H-7O-kjf"/>
-                            <constraint firstItem="OgH-eB-x3n" firstAttribute="leading" secondItem="Isv-6O-HZC" secondAttribute="leading" id="RIS-uY-rda"/>
-                            <constraint firstAttribute="bottom" secondItem="OgH-eB-x3n" secondAttribute="bottom" id="oPD-x7-GmP"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="历史信息" id="zaz-GE-sW8"/>
-                    <connections>
-                        <outlet property="timeLineTableView" destination="OgH-eB-x3n" id="hoN-BD-mcI"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ksf-vg-FWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

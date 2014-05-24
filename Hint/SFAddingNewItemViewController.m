@@ -49,10 +49,11 @@
 
     [self.rennFetchUserInfoDelegate loadCurrentUserInfo];
     [self checkUserInfo];
-        [self checkLovingPersonHistory];
+    [self checkLovingPersonHistory];
 
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"iconsLoadingFinished" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"currentUserInfoLoaded" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
 
 }
 
@@ -192,8 +193,8 @@
 - (void)notifyUserAfterClickedLoverWithloverName:(NSString *)loverName Match:(NSInteger)match currentUserBeLoved:(NSInteger)currentUserBeLoved loverBeloved:(NSInteger)loverBeloved
 {
     NSString *matchInfo;
-    NSString *currentUserBeLovedInfo;
-    NSString *loverBelovedInfo;
+//    NSString *currentUserBeLovedInfo;
+//    NSString *loverBelovedInfo;
 
     if (match != 0)
     {
@@ -266,6 +267,11 @@
         if(error == nil)
         {
             NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSMutableArray *lovedPeopleIDArray = [[NSMutableArray alloc]initWithArray:[infoRecieved objectForKey:@"have_love_id_list"]];
+            [lovedPeopleIDArray removeObjectAtIndex:0];
+            [SFRennFriendsListDelegate sharedManager].lovedPeopleIDArray = lovedPeopleIDArray;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"historyFinished" object:nil];
+
         }
     }];
     [dataTask resume];
