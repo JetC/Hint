@@ -9,7 +9,6 @@
 #import "SFHistoryCollectionViewCell.h"
 @interface SFHistoryCollectionViewCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 
 @end

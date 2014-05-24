@@ -8,12 +8,14 @@
 
 #import "SFHistoryViewController.h"
 #import "SFRennFriendsListDelegate.h"
+#import "SFHistoryCollectionViewCell.h"
 #warning 把.pch里面的人人SDK放到合适的文件里
 
 
-@interface SFHistoryViewController ()
+@interface SFHistoryViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *lovedPeopleIconImageArray;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -40,7 +42,10 @@
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
     self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
-//    [self loadLovedPeopleIcons];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+
+
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"iconsLoadingFinished" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"historyFinished" object:nil];
 
@@ -70,7 +75,39 @@
             }
         }
     }
+    [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+        [self.collectionView reloadData];
+    }];
 }
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView
+    numberOfItemsInSection:(NSInteger)section
+{
+    return self.lovedPeopleIconImageArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SFHistoryCollectionViewCell *historyCollectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"myCell" forIndexPath:indexPath];
+    if (historyCollectionViewCell == nil)
+    {
+        historyCollectionViewCell = [[SFHistoryCollectionViewCell alloc]init];
+    }
+    historyCollectionViewCell.imageView.image = [self.lovedPeopleIconImageArray objectAtIndex:indexPath.row];
+    return historyCollectionViewCell;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end

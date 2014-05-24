@@ -7,6 +7,8 @@
 //
 
 #import "SFHistoryCollectionViewController.h"
+#import "SFRennFriendsListDelegate.h"
+#import "SFHistoryCollectionViewCell.h"
 
 @implementation SFHistoryCollectionViewController
 
