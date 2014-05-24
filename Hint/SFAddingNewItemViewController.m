@@ -11,12 +11,13 @@
 #import "SFAddingNewItemTableViewCell.h"
 #import "SFRennFetchUserInfoDelegate.h"
 
-@interface SFAddingNewItemViewController ()<NSURLSessionDelegate>
+@interface SFAddingNewItemViewController ()<NSURLSessionDelegate,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *theNewItemTableView;
 @property (strong, nonatomic) SFRennFetchUserInfoDelegate *rennFetchUserInfoDelegate;
 @property BOOL hasCurrentUserInfoLoaded;
 @property (strong, nonatomic)NSURLSession *session;
+@property NSInteger indexClicked;
 @end
 
 
@@ -43,6 +44,7 @@
     self.session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
 
     self.hasCurrentUserInfoLoaded = NO;
+    self.indexClicked = 0;
 
     [[SFRennFriendsListDelegate sharedManager] loadListForTheTime:1];
     self.rennFetchUserInfoDelegate = [[SFRennFetchUserInfoDelegate alloc]init];
@@ -99,12 +101,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self sendLovingHintOfUserID:[[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"id"]];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"确认选择吗" message:[NSString stringWithFormat:@"确认选择%@为喜欢的对象吗",[[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"name"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是的", nil];
+    self.indexClicked = indexPath.row;
+    [alertView show];
+
 }
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        NSLog(@"Canceled");
+    }
+    else if (buttonIndex == 1)
+    {
+        [self sendLovingHintOfUserID:[[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:self.indexClicked] objectForKey:@"id"]];
+    }
+}
+
 
 - (void)sendLovingHintOfUserID:(NSString *)lovingUserID
 {
-    NSURL *url = [NSURL URLWithString:@"http://192.168.1.185/newlover"];
+    NSURL *url = [NSURL URLWithString:@"http://192.168.2.186/newlover"];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     NSString *params = [NSString stringWithFormat:@"hint_id=%@&lover_id=%@",self.rennFetchUserInfoDelegate.currentUserID,lovingUserID];
     NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
@@ -115,31 +133,39 @@
     {
         if(error == nil)
         {
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            [userDefaults setValue:[infoRecieved objectForKey:@"hint_loved_num"] forKey:@"numberUserBeLoved"];
-            [userDefaults setValue:[infoRecieved objectForKey:@"hint_have_love_num"] forKey:@"numberUserLoved"];
-
-            NSString *loverName;
-            for (id personInfo in [SFRennFriendsListDelegate sharedManager].friendsListInfoArray)
+            NSString *recievedDataString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+            if ([recievedDataString rangeOfString:@"status\": 1"].location != NSNotFound)
             {
-                if ([[personInfo objectForKey:@"id"]isEqualToString:lovingUserID])
+                [self showAlertViewWithTitle:@"已经点过这个人啦" message:@"我们理解您的心情，耐心静候啦" cancelButtonTitle:@"嗯哪！"];
+            }
+            else
+            {
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                [userDefaults setValue:[infoRecieved objectForKey:@"hint_loved_num"] forKey:@"numberUserBeLoved"];
+                [userDefaults setValue:[infoRecieved objectForKey:@"hint_have_love_num"] forKey:@"numberUserLoved"];
+
+                NSString *loverName;
+                for (id personInfo in [SFRennFriendsListDelegate sharedManager].friendsListInfoArray)
                 {
-                    loverName = [personInfo objectForKey:@"name"];
+                    if ([[personInfo objectForKey:@"id"]isEqualToString:lovingUserID])
+                    {
+                        loverName = [personInfo objectForKey:@"name"];
+                    }
+
                 }
 
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLovingNumbers" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addedLovingPerson" object:nil];
+
+
+                [self notifyUserAfterClickedLoverWithloverName:loverName
+                                                         Match:[[infoRecieved objectForKey:@"match"] integerValue]
+                                            currentUserBeLoved:[[infoRecieved objectForKey:@"hint_loved_num"] integerValue]
+                                                  loverBeloved:[[infoRecieved objectForKey:@"lover_loved_num"] integerValue]];
+                
+                
             }
-
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLovingNumbers" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"addedLovingPerson" object:nil];
-
-
-            [self notifyUserAfterClickedLoverWithloverName:loverName
-                                                     Match:[[infoRecieved objectForKey:@"match"] integerValue]
-                                        currentUserBeLoved:[[infoRecieved objectForKey:@"hint_loved_num"] integerValue]
-                                              loverBeloved:[[infoRecieved objectForKey:@"lover_loved_num"] integerValue]];
-
-
         }
     }];
     [dataTask resume];
@@ -157,7 +183,8 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundWithout64"]];
+
 }
 
 - (void)setupTableView
@@ -232,7 +259,7 @@
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
-    NSURL *url = [NSURL URLWithString:@"http://192.168.1.185/updata"];
+    NSURL *url = [NSURL URLWithString:@"http://192.168.2.186/updata"];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     NSString *params = [NSString stringWithFormat:@"hint_id=%@",[userDefaults objectForKey:@"currentUserID"]];
     NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
@@ -259,7 +286,7 @@
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
-    NSURL *url = [NSURL URLWithString:@"http://192.168.1.185/havelove"];
+    NSURL *url = [NSURL URLWithString:@"http://192.168.2.186/havelove"];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     NSString *params = [NSString stringWithFormat:@"user_id=%@",[userDefaults objectForKey:@"currentUserID"]];
     NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
