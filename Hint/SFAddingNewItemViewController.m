@@ -14,7 +14,6 @@
 @interface SFAddingNewItemViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *theNewItemTableView;
-@property (nonatomic, strong) NSMutableArray *friendsListArray;
 
 @end
 
@@ -49,8 +48,6 @@
     self.modalPresentationCapturesStatusBarAppearance = NO;
     [self.view addSubview:self.theNewItemTableView];
 
-    self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsNameArray;
-
     [[SFRennFriendsListDelegate sharedManager] loadListForTheTime:1];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
@@ -71,7 +68,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.friendsListArray.count;
+    return [SFRennFriendsListDelegate sharedManager].friendsListInfoArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,16 +79,17 @@
     {
         cell = [[SFAddingNewItemTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
-    cell.nameLabel.text = [[SFRennFriendsListDelegate sharedManager].friendsNameArray objectAtIndex:indexPath.row];
+
+    cell.nameLabel.text = [[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"name"];
     if ([SFRennFriendsListDelegate sharedManager].hasIconLoadingFinished == YES)
     {
-        cell.iconImageView.image = [[SFRennFriendsListDelegate sharedManager].iconImagesArray objectAtIndex:indexPath.row];
+        cell.iconImageView.image = [[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"iconImage"];
     }
 
     NSLog(@"IndexPath.row : %d",indexPath.row);
 
-    NSLog(@"Icon : %@",[[SFRennFriendsListDelegate sharedManager].iconImagesArray objectAtIndex:indexPath.row]);
-    NSLog(@"iconImagesArrayCount : %d",[SFRennFriendsListDelegate sharedManager].iconImagesArray.count);
+//    NSLog(@"Icon : %@",[[SFRennFriendsListDelegate sharedManager].iconImagesArray objectAtIndex:indexPath.row]);
+//    NSLog(@"iconImagesArrayCount : %d",[SFRennFriendsListDelegate sharedManager].iconImagesArray.count);
 
     NSLog(@"Now On Screen: %li",(long)indexPath.row);
     return cell;

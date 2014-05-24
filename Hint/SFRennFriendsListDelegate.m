@@ -34,10 +34,10 @@
 - (id)init
 {
     self = [super init];
-    _friendsNameArray = [[NSMutableArray alloc]init];
-    _friendsIconURLArray = [[NSMutableArray alloc]init];
+//    _friendsNameArray = [[NSMutableArray alloc]init];
+//    _friendsIconURLArray = [[NSMutableArray alloc]init];
     self.friendsListInfoArray = [[NSMutableArray alloc]init];
-    
+
     _needToLoadAgain = YES;
     _timesFriendsListLoaded = 0;
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -83,8 +83,8 @@
     arrayForResponse = response;
     static NSInteger timesProcessed = 0;
     timesProcessed++;
-    NSLog(@"self.friendsListArray.count:  %lu  /n  timesProcessed:%li\n\n\n\n",(unsigned long)self.friendsNameArray.count,(long)timesProcessed);
-    
+//    NSLog(@"self.friendsListArray.count:  %lu  /n  timesProcessed:%li\n\n\n\n",(unsigned long)self.friendsNameArray.count,(long)timesProcessed);
+
     if (arrayForResponse.count != 0)
     {
         [self serializingResponseArray:arrayForResponse];
@@ -145,12 +145,17 @@
 
 - (void)loadFriendsIcon
 {
-    self.iconImagesArray = [[NSMutableArray alloc]initWithCapacity:self.friendsNameArray.count];
-    for (NSInteger i = 0; i<self.friendsNameArray.count ;i++)
+    NSMutableArray *iconImagesArray = [[NSMutableArray alloc]init];
+    for (NSInteger i = 0; i<self.friendsListInfoArray.count ;i++)
     {
-        self.iconImagesArray[i] = [NSNull null];
+        iconImagesArray[i] = [NSNull null];
     }
-    for (NSString *iconUrlString in self.friendsIconURLArray)
+    NSMutableArray *iconUrlArray = [[NSMutableArray alloc]init];
+    for (NSInteger i = 0; i<self.friendsListInfoArray.count ;i++)
+    {
+        [iconUrlArray addObject:[self.friendsListInfoArray[i] objectForKey:@"iconImageUrl"]];
+    }
+    for (NSString *iconUrlString in iconUrlArray)
     {
         NSURL *url = [NSURL URLWithString:iconUrlString];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -161,23 +166,30 @@
             {
                 static NSInteger iconLoaded = 0;
                 NSLog(@"response.URL:%@",response.URL);
-                NSLog(@"friendsIconURLArray 0:%@",[self.friendsIconURLArray objectAtIndex:0]);
-                NSLog(@"URL is at index:%lu",(unsigned long)[self.friendsIconURLArray indexOfObject:response.URL]);
-                [self.iconImagesArray replaceObjectAtIndex:[self.friendsIconURLArray indexOfObject:[response.URL absoluteString]] withObject:[UIImage imageWithData:data]];
-
+                for (NSMutableDictionary *personInfo in self.friendsListInfoArray)
+                {
+                    if ([[personInfo objectForKey:@"iconImageUrl"] isEqualToString:[response.URL absoluteString]])
+                    {
+                        [personInfo setValue:[UIImage imageWithData:data] forKey:@"iconImage"];
+                    }
+                }
                 iconLoaded++;
                 NSLog(@"Icon Loaded: %ld",(long)iconLoaded);
-                if (iconLoaded >= self.friendsIconURLArray.count)
+
+                if (iconLoaded >= self.friendsListInfoArray.count)
                 {
-                    [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadTableViewData" object:nil];
-                    for (NSInteger i = 0; i<self.iconImagesArray.count ;i++)
+                    for (NSInteger i = 0; i<self.friendsListInfoArray.count ;i++)
                     {
-                        if ([self.iconImagesArray objectAtIndex:i]==[NSNull null])
+                        if ([self.friendsListInfoArray[i] objectForKey:@"iconImage"]  == [NSNull null])
                         {
-                            [self.iconImagesArray replaceObjectAtIndex:i withObject:[UIImage imageNamed:@"1"]];
+                            [iconImagesArray replaceObjectAtIndex:i withObject:[UIImage imageNamed:@"1"]];
                         }
+//                        [self.friendsListInfoArray[i] setValue:iconImagesArray[i] forKey:@"iconImage"];
                     }
+
                     self.hasIconLoadingFinished = YES;
+
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadTableViewData" object:nil];
                 }
             }
         }];
