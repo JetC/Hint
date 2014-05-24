@@ -9,12 +9,14 @@
 #import "SFAddingNewItemViewController.h"
 #import "SFRennFriendsListDelegate.h"
 #import "SFAddingNewItemTableViewCell.h"
+#import "SFRennFetchUserInfoDelegate.h"
 
-
-@interface SFAddingNewItemViewController ()
+@interface SFAddingNewItemViewController ()<NSURLSessionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *theNewItemTableView;
-
+@property (strong, nonatomic) SFRennFetchUserInfoDelegate *rennFetchUserInfoDelegate;
+@property BOOL hasCurrentUserInfoLoaded;
+@property (strong, nonatomic)NSURLSession *session;
 @end
 
 
@@ -30,40 +32,37 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [RennClient cancelForDelegate:self];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    [self setupTableView];
+    [self configView];
 
-    [self.theNewItemTableView registerNib:[UINib nibWithNibName:@"SFAddingNewItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFAddingNewItemTableViewCell"];
-    self.theNewItemTableView.delegate = self;
-    self.theNewItemTableView.dataSource = self;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.extendedLayoutIncludesOpaqueBars = NO;
-    self.modalPresentationCapturesStatusBarAppearance = NO;
-    [self.view addSubview:self.theNewItemTableView];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.timeoutIntervalForRequest = 15;
+    self.session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+
+    self.hasCurrentUserInfoLoaded = NO;
 
     [[SFRennFriendsListDelegate sharedManager] loadListForTheTime:1];
+    self.rennFetchUserInfoDelegate = [[SFRennFetchUserInfoDelegate alloc]init];
+    [self.rennFetchUserInfoDelegate loadCurrentUserInfo];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"currentUserInfoLoaded" object:nil];
+
 }
+
+
+
+#pragma mark TableView
+
 
 - (void)reloadTableViewData
 {
     [[NSOperationQueue mainQueue]addOperationWithBlock:^{
         [_theNewItemTableView reloadData];
     }];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -81,39 +80,139 @@
     }
 
     cell.nameLabel.text = [[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"name"];
+
     if ([SFRennFriendsListDelegate sharedManager].hasIconLoadingFinished == YES)
+    //当icon都加载完成之后
     {
         cell.iconImageView.image = [[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"iconImage"];
     }
 
     NSLog(@"IndexPath.row : %d",indexPath.row);
-
-//    NSLog(@"Icon : %@",[[SFRennFriendsListDelegate sharedManager].iconImagesArray objectAtIndex:indexPath.row]);
-//    NSLog(@"iconImagesArrayCount : %d",[SFRennFriendsListDelegate sharedManager].iconImagesArray.count);
-
     NSLog(@"Now On Screen: %li",(long)indexPath.row);
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self sendLovingHintOfUserID:[[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"id"]];
+}
+
+- (void)sendLovingHintOfUserID:(NSString *)lovingUserID
+{
+//    if (self.hasCurrentUserInfoLoaded == YES)
+//    {
+    NSURL *url = [NSURL URLWithString:@"http://192.168.1.185/newlover"];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    NSString *params = [NSString stringWithFormat:@"hint_id=%@&lover_id=%@",self.rennFetchUserInfoDelegate.currentUserID,lovingUserID];
+    NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
+    [urlRequest setHTTPBody:data];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLSessionDataTask * dataTask = [self.session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        if(error == nil)
+        {
+            NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSString *loverName;
+            for (id personInfo in [SFRennFriendsListDelegate sharedManager].friendsListInfoArray)
+            {
+                if ([[personInfo objectForKey:@"id"]isEqualToString:lovingUserID])
+                {
+                    loverName = [personInfo objectForKey:@"name"];
+                }
+
+            }
+
+            [self notifyUserAfterClickedLoverWithloverName:loverName
+                                                     Match:[[infoRecieved objectForKey:@"match"] integerValue]
+                                        currentUserBeLoved:[[infoRecieved objectForKey:@"hint_loved_num"] integerValue]
+                                              loverBeloved:[[infoRecieved objectForKey:@"lover_loved_num"] integerValue]];
+
+
+        }
+    }];
+    [dataTask resume];
 
 
 
+//    }
+
+}
+
+#pragma mark Config Kits
+
+- (void)configView
+{
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.modalPresentationCapturesStatusBarAppearance = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)setupTableView
+{
+    [self.theNewItemTableView registerNib:[UINib nibWithNibName:@"SFAddingNewItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFAddingNewItemTableViewCell"];
+    self.theNewItemTableView.delegate = self;
+    self.theNewItemTableView.dataSource = self;
+    [self.view addSubview:self.theNewItemTableView];
+
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [RennClient cancelForDelegate:self];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 64;
+}
 
 
+- (void)currentUserInfoLoaded
+{
+    self.hasCurrentUserInfoLoaded = YES;
+}
 
 
+- (void)notifyUserAfterClickedLoverWithloverName:(NSString *)loverName Match:(NSInteger)match currentUserBeLoved:(NSInteger)currentUserBeLoved loverBeloved:(NSInteger)loverBeloved
+{
+    NSString *matchInfo;
+    NSString *currentUserBeLovedInfo;
+    NSString *loverBelovedInfo;
 
+    if (match != 0)
+    {
+        matchInfo = [NSString stringWithFormat:@"恭喜，%@妹子早就看上你了！\n 还不快发一条私信？",loverName];
+    }
+    else
+    {
+        matchInfo = [NSString stringWithFormat:@"你喜欢的%@妹子目前已经有%d 个人暗暗喜欢了哟\n 还不快快行动？",loverName,loverBeloved];
+    }
+    [self showAlertViewWithTitle:@"结果" message:matchInfo cancelButtonTitle:nil];
+}
 
-
-
-
-
-
-
-
-
-
-
+- (void)showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle
+{
+    if (title == nil || [title  isEqual: @""])
+    {
+        title = @"提示";
+    }
+    if (cancelButtonTitle == nil || [cancelButtonTitle  isEqual: @""])
+    {
+        cancelButtonTitle = @"知道啦！";
+    }
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:title message:message delegate:nil cancelButtonTitle:cancelButtonTitle otherButtonTitles: nil];
+    [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+        [alertView show];
+    }];
+}
 
 
 

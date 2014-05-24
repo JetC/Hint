@@ -8,6 +8,14 @@
 
 #import <RennSDK/RennSDK.h>
 
-@interface SFRennFetchUserInfoDelegate : ListUserFriendParam
+@interface SFRennFetchUserInfoDelegate : RennClient
+
+@property (nonatomic, strong) NSString *currentUserName;
+@property (nonatomic, strong) NSString *currentUserID;
+@property (nonatomic, strong) NSString *currentUserIcon;
+
+- (void)loadCurrentUserInfo;
+
+
 
 @end

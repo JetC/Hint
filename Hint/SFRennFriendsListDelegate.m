@@ -34,15 +34,13 @@
 - (id)init
 {
     self = [super init];
-//    _friendsNameArray = [[NSMutableArray alloc]init];
-//    _friendsIconURLArray = [[NSMutableArray alloc]init];
+
     self.friendsListInfoArray = [[NSMutableArray alloc]init];
+
+    [self setupUrlSession];
 
     _needToLoadAgain = YES;
     _timesFriendsListLoaded = 0;
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.timeoutIntervalForRequest = 15;
-    self.iconSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     self.hasIconLoadingFinished = NO;
 
     return self;
@@ -83,8 +81,6 @@
     arrayForResponse = response;
     static NSInteger timesProcessed = 0;
     timesProcessed++;
-//    NSLog(@"self.friendsListArray.count:  %lu  /n  timesProcessed:%li\n\n\n\n",(unsigned long)self.friendsNameArray.count,(long)timesProcessed);
-
     if (arrayForResponse.count != 0)
     {
         [self serializingResponseArray:arrayForResponse];
@@ -114,8 +110,9 @@
 {
     for (id singlePersonInfo in arrayForResponse)
     {
-        NSMutableDictionary *friendInfoDictionary = [[NSMutableDictionary alloc]initWithObjects:@[@"name",@"iconImage",@"iconImageUrl"] forKeys:@[@"name",@"iconImage",@"iconImageUrl"]];
+        NSMutableDictionary *friendInfoDictionary = [[NSMutableDictionary alloc]initWithObjects:@[@"name",@"iconImage",@"iconImageUrl",@"id"] forKeys:@[@"name",@"iconImage",@"iconImageUrl",@"id"]];
         [friendInfoDictionary setValue:[singlePersonInfo objectForKey:@"name"] forKey:@"name"];
+        [friendInfoDictionary setValue:[NSString stringWithFormat:@"%@",[singlePersonInfo objectForKey:@"id"]] forKey:@"id"];
         NSArray *iconURLArray = [[NSArray alloc]initWithArray:[singlePersonInfo objectForKey:@"avatar"]];
         for (NSDictionary *singlePersonIconArray in iconURLArray)
         {
@@ -184,12 +181,10 @@
                         {
                             [iconImagesArray replaceObjectAtIndex:i withObject:[UIImage imageNamed:@"1"]];
                         }
-//                        [self.friendsListInfoArray[i] setValue:iconImagesArray[i] forKey:@"iconImage"];
                     }
-
                     self.hasIconLoadingFinished = YES;
-
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadTableViewData" object:nil];
+                    
                 }
             }
         }];
@@ -199,6 +194,17 @@
 }
 
 
+
+
+
+#pragma mark Config Kits
+
+- (void)setupUrlSession
+{
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.timeoutIntervalForRequest = 15;
+    self.iconSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+}
 
 
 

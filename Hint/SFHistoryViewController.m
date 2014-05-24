@@ -87,11 +87,11 @@
 //    cell = [nib objectAtIndex:0];
     if (indexPath.row % 2 == 0)
     {
-        cell.imageOnTableCell.image = [UIImage imageNamed:@"UP TimeLine"];
+        cell.imageOnTableCell.image = [UIImage imageNamed:@"Timeline Number Background"];
     }
     else
     {
-        cell.imageOnTableCell.image = [UIImage imageNamed:@"Down TimeLine"];
+        cell.imageOnTableCell.image = [UIImage imageNamed:@"Timeline Number Background"];
     }
     
     cell.labelOnTableCell.text = [NSString stringWithFormat:@"Test %ld",(long)indexPath.row];
@@ -112,7 +112,7 @@
 //调整行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 64;
 }
 
 @end
