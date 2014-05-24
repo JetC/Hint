@@ -83,7 +83,7 @@
         cell = [[SFAddingNewItemTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     cell.nameLabel.text = [[SFRennFriendsListDelegate sharedManager].friendsNameArray objectAtIndex:indexPath.row];
-    if ([SFRennFriendsListDelegate sharedManager].iconImagesArray.count == [SFRennFriendsListDelegate sharedManager].friendsNameArray.count)
+    if ([SFRennFriendsListDelegate sharedManager].hasIconLoadingFinished == YES)
     {
         cell.iconImageView.image = [[SFRennFriendsListDelegate sharedManager].iconImagesArray objectAtIndex:indexPath.row];
     }

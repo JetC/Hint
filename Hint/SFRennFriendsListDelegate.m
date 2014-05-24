@@ -42,6 +42,8 @@
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.timeoutIntervalForRequest = 15;
     self.iconSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+    self.hasIconLoadingFinished = NO;
+
     return self;
 }
 
@@ -141,6 +143,10 @@
 - (void)loadFriendsIcon
 {
     self.iconImagesArray = [[NSMutableArray alloc]initWithCapacity:self.friendsNameArray.count];
+    for (NSInteger i = 0; i<self.friendsNameArray.count ;i++)
+    {
+        self.iconImagesArray[i] = [NSNull null];
+    }
     for (NSString *iconUrlString in self.friendsIconURLArray)
     {
         NSURL *url = [NSURL URLWithString:iconUrlString];
@@ -153,15 +159,22 @@
                 static NSInteger iconLoaded = 0;
                 NSLog(@"response.URL:%@",response.URL);
                 NSLog(@"friendsIconURLArray 0:%@",[self.friendsIconURLArray objectAtIndex:0]);
-                NSLog(@"URL is at index:%d",[self.friendsIconURLArray indexOfObject:response.URL]);
-                [self.iconImagesArray insertObject:[UIImage imageWithData:data] atIndex:[self.friendsIconURLArray indexOfObject:response.URL]+1];
+                NSLog(@"URL is at index:%lu",(unsigned long)[self.friendsIconURLArray indexOfObject:response.URL]);
+                [self.iconImagesArray replaceObjectAtIndex:[self.friendsIconURLArray indexOfObject:[response.URL absoluteString]] withObject:[UIImage imageWithData:data]];
 
                 iconLoaded++;
                 NSLog(@"Icon Loaded: %ld",(long)iconLoaded);
                 if (iconLoaded >= self.friendsIconURLArray.count)
                 {
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadTableViewData" object:nil];
-
+                    for (NSInteger i = 0; i<self.iconImagesArray.count ;i++)
+                    {
+                        if ([self.iconImagesArray objectAtIndex:i]==[NSNull null])
+                        {
+                            [self.iconImagesArray replaceObjectAtIndex:i withObject:[UIImage imageNamed:@"1"]];
+                        }
+                    }
+                    self.hasIconLoadingFinished = YES;
                 }
             }
         }];
