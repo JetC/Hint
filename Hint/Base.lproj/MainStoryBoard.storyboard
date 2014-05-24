@@ -50,11 +50,11 @@
                         <viewControllerLayoutGuide type="bottom" id="dHA-9d-sei"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="D83-gA-2cT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="A9q-qb-kj3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -105,7 +105,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Awj-IZ-OCy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l8S-Nk-hVq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settingFrame" translatesAutoresizingMaskIntoConstraints="NO" id="99I-MP-rZC">
@@ -174,11 +174,11 @@
             </objects>
             <point key="canvasLocation" x="1173" y="993"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - 地图-->
         <scene sceneID="ZfI-ow-G2f">
             <objects>
                 <navigationController definesPresentationContext="YES" id="lUP-IW-LEC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="db5-2F-rw8"/>
+                    <tabBarItem key="tabBarItem" title="地图" image="mapTabIcon" id="db5-2F-rw8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SUF-0u-zn1">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -190,20 +190,51 @@
             </objects>
             <point key="canvasLocation" x="711" y="1710"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="hvn-bz-IBk">
             <objects>
-                <viewController id="q09-wz-Oxe" sceneMemberID="viewController">
+                <viewController id="q09-wz-Oxe" customClass="SFMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YEl-sf-9Rg"/>
                         <viewControllerLayoutGuide type="bottom" id="qai-bz-Ezn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FbK-Fn-yVZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0od-Dr-HVL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jr-ii-h6u">
+                                <rect key="frame" x="20" y="373" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="回我的位置">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToCurrentPosition:" destination="q09-wz-Oxe" eventType="touchUpInside" id="LVz-jJ-wxe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAf-hr-faT">
+                                <rect key="frame" x="210" y="373" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="看看她的位置">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPositionOfSelectedVehicle:" destination="q09-wz-Oxe" eventType="touchUpInside" id="Vik-Be-vi5"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Xbd-8H-kYM"/>
+                    <connections>
+                        <outlet property="backToCurrentPositionButton" destination="2Jr-ii-h6u" id="Kko-Kb-UcL"/>
+                        <outlet property="mapView" destination="0od-Dr-HVL" id="nHO-5S-uGj"/>
+                        <outlet property="viewVehiclePositionButton" destination="yAf-hr-faT" id="uHW-1Y-MZO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t36-1T-V1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -234,11 +265,11 @@
                         <viewControllerLayoutGuide type="bottom" id="6sX-F6-Tha"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Isv-6O-HZC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y8n-t9-mo1">
-                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y8n-t9-mo1">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bFQ-WM-RE7">
                                     <size key="itemSize" width="85" height="87"/>
@@ -275,6 +306,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="y8n-t9-mo1" firstAttribute="top" secondItem="1Yd-hT-Tkk" secondAttribute="bottom" id="8eu-AZ-CjO"/>
+                            <constraint firstItem="y8n-t9-mo1" firstAttribute="leading" secondItem="Isv-6O-HZC" secondAttribute="leading" id="XiC-c0-bK8"/>
+                            <constraint firstAttribute="trailing" secondItem="y8n-t9-mo1" secondAttribute="trailing" id="eFF-T1-Ccr"/>
+                            <constraint firstAttribute="bottom" secondItem="y8n-t9-mo1" secondAttribute="bottom" id="gqw-VM-T02"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="历史信息" id="zaz-GE-sW8"/>
                     <connections>
@@ -292,11 +329,12 @@
         <image name="6" width="26" height="26"/>
         <image name="RenRenLogin" width="468" height="98"/>
         <image name="icon" width="200" height="200"/>
+        <image name="mapTabIcon" width="20" height="21"/>
         <image name="settingFrame" width="320" height="151"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

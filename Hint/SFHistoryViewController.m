@@ -44,13 +44,11 @@
     self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-
+    self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundWith64"]];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"iconsLoadingFinished" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"historyFinished" object:nil];
-
-
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"addedLovingPerson" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +78,7 @@
     }];
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView
+- (NSInteger)collectionView:(UICollectionView *)collectionView
     numberOfItemsInSection:(NSInteger)section
 {
     return self.lovedPeopleIconImageArray.count;
@@ -93,7 +91,10 @@
     {
         historyCollectionViewCell = [[SFHistoryCollectionViewCell alloc]init];
     }
-    historyCollectionViewCell.imageView.image = [self.lovedPeopleIconImageArray objectAtIndex:indexPath.row];
+    if (self.lovedPeopleIconImageArray.count > 0)
+    {
+        historyCollectionViewCell.imageView.image = [self.lovedPeopleIconImageArray objectAtIndex:indexPath.row];
+    }
     return historyCollectionViewCell;
 }
 

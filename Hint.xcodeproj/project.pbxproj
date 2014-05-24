@@ -41,6 +41,8 @@
 		DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF9114BC18E5BF540051B4C0 /* SFRennFriendsListDelegate.m */; };
 		DF91321218DD20AA008251DD /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF91321018DD20AA008251DD /* Reveal.framework */; };
 		DFB0014E1930FAC70078A221 /* SFHistoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB0014D1930FAC70078A221 /* SFHistoryCollectionViewCell.m */; };
+		DFB001521931165C0078A221 /* SFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB001511931165C0078A221 /* SFMapViewController.m */; };
+		DFB00155193118A10078A221 /* SFMyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB00154193118A10078A221 /* SFMyLocation.m */; };
 		DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */; };
 		DFF109C118DDD3A7003F3D57 /* SFSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */; };
 		DFF109C418DDD3D6003F3D57 /* SFAddingItemNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */; };
@@ -111,6 +113,10 @@
 		DF91321018DD20AA008251DD /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		DFB0014C1930FAC70078A221 /* SFHistoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryCollectionViewCell.h; sourceTree = "<group>"; };
 		DFB0014D1930FAC70078A221 /* SFHistoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryCollectionViewCell.m; sourceTree = "<group>"; };
+		DFB001501931165C0078A221 /* SFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMapViewController.h; sourceTree = "<group>"; };
+		DFB001511931165C0078A221 /* SFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMapViewController.m; sourceTree = "<group>"; };
+		DFB00153193118A10078A221 /* SFMyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMyLocation.h; sourceTree = "<group>"; };
+		DFB00154193118A10078A221 /* SFMyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMyLocation.m; sourceTree = "<group>"; };
 		DFF109BC18DDCD9F003F3D57 /* SFHistoryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryNavigationController.h; sourceTree = "<group>"; };
 		DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryNavigationController.m; sourceTree = "<group>"; };
 		DFF109BF18DDD3A7003F3D57 /* SFSettingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingNavigationController.h; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 				DF6269AD18D5D31900A614CB /* HistoryView */,
 				DF6269AF18D5D33700A614CB /* AddLovingPerson */,
 				DF6269AE18D5D32700A614CB /* SettingView */,
+				DFB0014F193115EF0078A221 /* MapView */,
 				DF42D5B918E05236002E82CA /* JSON */,
 				DFF109B818DDBF27003F3D57 /* 3rd Party Frameworks */,
 				DF09153C18D455460084B562 /* Supporting Files */,
@@ -297,6 +304,17 @@
 				DF58664F18FA70D2009C9C4F /* SFAddingNewItemTableViewCell.xib */,
 			);
 			name = AddLovingPerson;
+			sourceTree = "<group>";
+		};
+		DFB0014F193115EF0078A221 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				DFB001501931165C0078A221 /* SFMapViewController.h */,
+				DFB001511931165C0078A221 /* SFMapViewController.m */,
+				DFB00153193118A10078A221 /* SFMyLocation.h */,
+				DFB00154193118A10078A221 /* SFMyLocation.m */,
+			);
+			name = MapView;
 			sourceTree = "<group>";
 		};
 		DFF109B818DDBF27003F3D57 /* 3rd Party Frameworks */ = {
@@ -415,11 +433,13 @@
 				DF80521018D557DD009D6103 /* SFHistoryViewController.m in Sources */,
 				DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */,
 				DF9114BD18E5BF540051B4C0 /* SFRennFriendsListDelegate.m in Sources */,
+				DFB001521931165C0078A221 /* SFMapViewController.m in Sources */,
 				DF34CB9E19192319008EEED8 /* SFRennFetchUserInfoDelegate.m in Sources */,
 				DF42D5CB18E0524C002E82CA /* SBJsonParser.m in Sources */,
 				DF58665018FA70D2009C9C4F /* SFAddingNewItemTableViewCell.m in Sources */,
 				DF42D5CA18E0524C002E82CA /* SBJsonBase.m in Sources */,
 				DF42D5CC18E0524C002E82CA /* SBJsonWriter.m in Sources */,
+				DFB00155193118A10078A221 /* SFMyLocation.m in Sources */,
 				DF80520A18D54BD3009D6103 /* SFTabBarController.m in Sources */,
 				DF42D5C918E0524C002E82CA /* SBJSON.m in Sources */,
 				DF09154218D455460084B562 /* main.m in Sources */,

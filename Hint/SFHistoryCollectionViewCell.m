@@ -10,7 +10,6 @@
 @interface SFHistoryCollectionViewCell ()
 
 
-
 @end
 
 @implementation SFHistoryCollectionViewCell

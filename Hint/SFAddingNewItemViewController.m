@@ -90,6 +90,7 @@
     {
         cell.iconImageView.image = [[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"iconImage"];
     }
+    cell.backgroundColor = [UIColor clearColor];
 
     NSLog(@"IndexPath.row : %ld",(long)indexPath.row);
     NSLog(@"Now On Screen: %li",(long)indexPath.row);
@@ -130,6 +131,7 @@
             }
 
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLovingNumbers" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"addedLovingPerson" object:nil];
 
 
             [self notifyUserAfterClickedLoverWithloverName:loverName
@@ -163,6 +165,8 @@
     [self.theNewItemTableView registerNib:[UINib nibWithNibName:@"SFAddingNewItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFAddingNewItemTableViewCell"];
     self.theNewItemTableView.delegate = self;
     self.theNewItemTableView.dataSource = self;
+    self.theNewItemTableView.backgroundColor = [UIColor clearColor];
+
     [self.view addSubview:self.theNewItemTableView];
 
 }
