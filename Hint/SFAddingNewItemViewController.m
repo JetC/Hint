@@ -13,15 +13,13 @@
 
 @interface SFAddingNewItemViewController ()
 
-@property (nonatomic, strong) UITableView *theNewItemTableView;
-//@property (nonatomic, strong) SFRennFriendsListDelegate *rennFriendsListDelegate;
+@property (weak, nonatomic) IBOutlet UITableView *theNewItemTableView;
 @property (nonatomic, strong) NSMutableArray *friendsListArray;
 
 @end
 
 
 @implementation SFAddingNewItemViewController
-@synthesize theNewItemTableView = _theNewItemTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,33 +33,28 @@
 
 - (void)dealloc
 {
-//    [RennClient cancelForDelegate:self];
+    [RennClient cancelForDelegate:self];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.theNewItemTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kNavigationBarWithStatusBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+
     [self.theNewItemTableView registerNib:[UINib nibWithNibName:@"SFAddingNewItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"SFAddingNewItemTableViewCell"];
     self.theNewItemTableView.delegate = self;
     self.theNewItemTableView.dataSource = self;
-    self.theNewItemTableView.contentInset = UIEdgeInsetsMake(0, 0, kNavigationBarWithStatusBarHeight+kTabBarHeight, 0);
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.modalPresentationCapturesStatusBarAppearance = NO;
     [self.view addSubview:self.theNewItemTableView];
     
     
-//    BOOL i = YES;
-//    i = self.rennFriendsListDelegate.hasLoadingFriendsListFinished;
-    self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsListArray;
-    if (self.friendsListArray.count == 0)
-    {
-        NSLog(@"Array is Nil!");
-        [SFRennFriendsListDelegate sharedManager];
-    }
-    else
-    {
-        [self.theNewItemTableView reloadData];
-    }
+
+    self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsNameArray;
+
+    [[SFRennFriendsListDelegate sharedManager] loadListForTheTime:1];
+
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
 }
 
@@ -85,12 +78,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.friendsListArray.count == 0)
-    {
-        self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsListArray;
-        [self.theNewItemTableView reloadData];
-    }
-    
     static NSString *cellIdentifier = @"SFAddingNewItemTableViewCell";
     SFAddingNewItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell)
@@ -98,8 +85,7 @@
         cell = [[SFAddingNewItemTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     cell.nameLabel.text = [self.friendsListArray objectAtIndex:indexPath.row];
-    NSLog(@"%@",[self.friendsListArray objectAtIndex:indexPath.row]);
-    NSLog(@"%li:%@",(long)indexPath.row,cell.nameLabel.text);
+    NSLog(@"Now Loaded: %li",(long)indexPath.row);
     return cell;
 }
 

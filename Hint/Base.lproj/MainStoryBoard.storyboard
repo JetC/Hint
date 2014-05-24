@@ -45,15 +45,35 @@
             <objects>
                 <viewController id="uRA-r7-t4H" customClass="SFAddingNewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OTZ-2D-NJZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wog-C4-04o"/>
+                        <viewControllerLayoutGuide type="top" id="fgy-u2-XXt"/>
+                        <viewControllerLayoutGuide type="bottom" id="dHA-9d-sei"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="D83-gA-2cT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="A9q-qb-kj3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="uRA-r7-t4H" id="KnT-3S-69I"/>
+                                    <outlet property="delegate" destination="uRA-r7-t4H" id="xZF-7h-5Ge"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="A9q-qb-kj3" secondAttribute="bottom" id="5AL-4n-Umk"/>
+                            <constraint firstItem="A9q-qb-kj3" firstAttribute="top" secondItem="D83-gA-2cT" secondAttribute="top" id="Klb-TR-kWj"/>
+                            <constraint firstItem="A9q-qb-kj3" firstAttribute="leading" secondItem="D83-gA-2cT" secondAttribute="leading" id="Vmc-36-f7G"/>
+                            <constraint firstAttribute="trailing" secondItem="A9q-qb-kj3" secondAttribute="trailing" id="lv8-z8-znF"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="添加信息" id="Jg1-1w-GV1"/>
+                    <connections>
+                        <outlet property="theNewItemTableView" destination="A9q-qb-kj3" id="wea-Dg-PD0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zns-XI-Bl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -80,8 +100,8 @@
             <objects>
                 <viewController id="yKf-gj-gPX" customClass="SFSettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Z2D-2D-aBr"/>
-                        <viewControllerLayoutGuide type="bottom" id="KXF-Z4-oMJ"/>
+                        <viewControllerLayoutGuide type="top" id="z6G-3R-k22"/>
+                        <viewControllerLayoutGuide type="bottom" id="Awj-IZ-OCy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l8S-Nk-hVq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -160,20 +180,30 @@
             <objects>
                 <viewController id="GOk-6V-3EV" customClass="SFHistoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2RV-rU-9ur"/>
-                        <viewControllerLayoutGuide type="bottom" id="QkL-Gy-Btf"/>
+                        <viewControllerLayoutGuide type="top" id="1Yd-hT-Tkk"/>
+                        <viewControllerLayoutGuide type="bottom" id="6sX-F6-Tha"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Isv-6O-HZC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OgH-eB-x3n">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OgH-eB-x3n">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="GOk-6V-3EV" id="Luk-8S-QwE"/>
+                                    <outlet property="delegate" destination="GOk-6V-3EV" id="vT5-ey-I1M"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OgH-eB-x3n" secondAttribute="trailing" id="2fh-b9-16F"/>
+                            <constraint firstItem="OgH-eB-x3n" firstAttribute="top" secondItem="Isv-6O-HZC" secondAttribute="top" id="59H-7O-kjf"/>
+                            <constraint firstItem="OgH-eB-x3n" firstAttribute="leading" secondItem="Isv-6O-HZC" secondAttribute="leading" id="RIS-uY-rda"/>
+                            <constraint firstAttribute="bottom" secondItem="OgH-eB-x3n" secondAttribute="bottom" id="oPD-x7-GmP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="历史信息" id="zaz-GE-sW8"/>
                     <connections>

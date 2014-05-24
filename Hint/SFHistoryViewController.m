@@ -41,8 +41,9 @@
     
     self.timeLineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.timeLineTableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight+kNavigationBarWithStatusBarHeight, 0);
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.modalPresentationCapturesStatusBarAppearance = NO;
     
     [self.view addSubview:self.timeLineTableView];
 }

@@ -51,9 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [RennClient initWithAppId:@"265615"
-                       apiKey:@"c1ae143617cf43138056d90c62461a83"
-                    secretKey:@"6d407586023f4db996cc243fa1e4e8f6"];
+    [RennClient initWithAppId:@"265615" apiKey:@"c1ae143617cf43138056d90c62461a83" secretKey:@"6d407586023f4db996cc243fa1e4e8f6"];
     
     [RennClient setScope:@"read_user_blog,read_user_checkin,read_user_feed,read_user_guestbook,read_user_invitation,read_user_like_history,read_user_message,read_user_notification,read_user_photo,read_user_status,read_user_album,read_user_comment,read_user_share,read_user_request,publish_blog,publish_checkin,publish_feed,publish_share,write_guestbook,send_invitation,send_request,send_message,send_notification,photo_upload,status_update,create_album,publish_comment,operate_like,admin_page"];
     [RennClient setTokenType:@"mac"];
@@ -66,10 +64,7 @@
         self.renRenConnectionStatusLabel.text = @"要登录吗？点击下面按钮";
         [RennClient loginWithDelegate:self];
     }
-//    self.friendsListArray = [[NSMutableArray alloc]init];
-//    self.friendsListDelegate = [[SFRennFriendsListDelegate alloc]init];
-//    self.friendsListArray = self.friendsListDelegate.friendsListArray;
-//    self.friendsListDelegate.settingViewController = self;
+
     _rennFetchUserInfoDelegate = [[SFRennFetchUserInfoDelegate alloc]init];
 }
 
@@ -230,7 +225,7 @@
 - (void)setupFriendsListDelegate
 {
     self.friendsListArray = [[NSMutableArray alloc]init];
-    self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsListArray;
+    self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsNameArray;
 }
 
 - (void)rennLogoutSuccess

@@ -12,8 +12,11 @@
 @interface SFRennFriendsListDelegate : ListUserFriendParam
 
 
-@property (strong, nonatomic) NSMutableArray *friendsListArray;
+@property (strong, nonatomic) NSMutableArray *friendsNameArray;
+@property (strong, nonatomic) NSMutableArray *friendsIconURLArray;
+
 
 + (instancetype)sharedManager;
+- (void)loadListForTheTime:(NSInteger)timeLoaded;
 
 @end

@@ -30,6 +30,10 @@
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"1"] forBarMetrics:UIBarMetricsDefault];
 //以下内容仍不明白
     self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    self.navigationController.navigationBar.translucent = NO;
+
+
+
 }
 
 //???:111

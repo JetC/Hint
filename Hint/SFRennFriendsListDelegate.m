@@ -10,13 +10,11 @@
 //#import "SFRennFriendsListWithTag+ ListUserFriendParam.h"
 #import "SBJSON.h"
 
-#define kNumberOfPagesLoadEachTime 1
-#define kPageSize 50
+#define kNumberOfPagesLoadEachTime 5
+#define kPageSize 100
 
 @interface SFRennFriendsListDelegate ()
 
-
-//@property (nonatomic, strong)NSMutableArray *mArray;
 @property BOOL needToLoadAgain;
 @property NSInteger timesFriendsListLoaded;
 
@@ -27,10 +25,12 @@
 - (id)init
 {
     self = [super init];
-    _friendsListArray = [[NSMutableArray alloc]init];
+    _friendsNameArray = [[NSMutableArray alloc]init];
+    _friendsIconURLArray = [[NSMutableArray alloc]init];
+
     _needToLoadAgain = YES;
     _timesFriendsListLoaded = 0;
-    [self loadListForTheTime:1];
+//    [self loadListForTheTime:1];
     return self;
 }
 
@@ -47,7 +47,7 @@
 - (void)loadListForTheTime:(NSInteger)timeLoaded
 {
     static NSInteger i = 1;
-    for (i = 1+kNumberOfPagesLoadEachTime*(timeLoaded-1); i<= kNumberOfPagesLoadEachTime+kNumberOfPagesLoadEachTime*(timeLoaded-1); i++)
+    for (i = 1+kNumberOfPagesLoadEachTime*(timeLoaded-1); i <=  kNumberOfPagesLoadEachTime+kNumberOfPagesLoadEachTime*(timeLoaded-1); i++)
     {
         ListUserFriendParam *param = [[ListUserFriendParam alloc] init];
         param.userId = [RennClient uid];
@@ -64,13 +64,12 @@
 
 - (void)rennService:(RennService *)service requestSuccessWithResponse:(id)response
 {
-//    NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
-//    NSLog(@"%@",_mArray);
+    NSLog(@"requestSuccessWithResponse:%@", [[SBJSON new]  stringWithObject:response error:nil]);
     NSMutableArray *arrayForResponse = [[NSMutableArray alloc]init];
     arrayForResponse = response;
     static NSInteger timesProcessed = 0;
     timesProcessed++;
-    NSLog(@"self.friendsListArray.count:  %lu  /n  timesProcessed:%li\n\n\n\n",(unsigned long)self.friendsListArray.count,(long)timesProcessed);
+    NSLog(@"self.friendsListArray.count:  %lu  /n  timesProcessed:%li\n\n\n\n",(unsigned long)self.friendsNameArray.count,(long)timesProcessed);
     
     if (arrayForResponse.count != 0)
     {
@@ -99,15 +98,22 @@
 
 - (void)serializingResponseArray:(NSMutableArray *)arrayForResponse
 {
-    NSInteger i;
-    for (i = 0; i<arrayForResponse.count ; i++)
+    for (id singlePersonInfo in arrayForResponse)
     {
-        NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
-        [tmpArray addObject:[arrayForResponse objectAtIndex:i]];
-        NSDictionary *tmpDict = [[NSDictionary alloc]initWithDictionary:[tmpArray objectAtIndex:0]];
-        [self.friendsListArray addObject:[tmpDict objectForKey:@"name"]];
+        [_friendsNameArray addObject:[singlePersonInfo objectForKey:@"name"]];
+
+        NSArray *iconURLArray = [[NSArray alloc]initWithArray:[singlePersonInfo objectForKey:@"avatar"]];
+        for (NSDictionary *singlePersonIconArray in iconURLArray)
+        {
+            if ([[singlePersonIconArray objectForKey:@"size"] isEqualToString:@"HEAD"])
+            {
+                [_friendsIconURLArray addObject:[singlePersonIconArray objectForKey:@"url"]];
+            }
+
+        }
 
     }
+
 }
 
 - (void)checkWhetherNeedToLoadFriendsListAgain
