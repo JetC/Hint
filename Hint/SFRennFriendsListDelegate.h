@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSMutableArray *friendsNameArray;
 @property (strong, nonatomic) NSMutableArray *friendsIconURLArray;
+@property (strong, nonatomic) NSMutableArray *iconImagesArray;
 
 
 + (instancetype)sharedManager;

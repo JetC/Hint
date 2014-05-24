@@ -48,8 +48,6 @@
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
     [self.view addSubview:self.theNewItemTableView];
-    
-    
 
     self.friendsListArray = [SFRennFriendsListDelegate sharedManager].friendsNameArray;
 
@@ -84,8 +82,18 @@
     {
         cell = [[SFAddingNewItemTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
-    cell.nameLabel.text = [self.friendsListArray objectAtIndex:indexPath.row];
-    NSLog(@"Now Loaded: %li",(long)indexPath.row);
+    cell.nameLabel.text = [[SFRennFriendsListDelegate sharedManager].friendsNameArray objectAtIndex:indexPath.row];
+    if ([SFRennFriendsListDelegate sharedManager].iconImagesArray.count == [SFRennFriendsListDelegate sharedManager].friendsNameArray.count)
+    {
+        cell.iconImageView.image = [[SFRennFriendsListDelegate sharedManager].iconImagesArray objectAtIndex:indexPath.row];
+    }
+
+    NSLog(@"IndexPath.row : %d",indexPath.row);
+
+    NSLog(@"Icon : %@",[[SFRennFriendsListDelegate sharedManager].iconImagesArray objectAtIndex:indexPath.row]);
+    NSLog(@"iconImagesArrayCount : %d",[SFRennFriendsListDelegate sharedManager].iconImagesArray.count);
+
+    NSLog(@"Now On Screen: %li",(long)indexPath.row);
     return cell;
 }
 
