@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *friendsIconURLArray;
 @property (strong, nonatomic) NSMutableArray *iconImagesArray;
 @property BOOL hasIconLoadingFinished;
-
+@property (strong, nonatomic) NSMutableArray *friendsListInfoArray;
 
 + (instancetype)sharedManager;
 - (void)loadListForTheTime:(NSInteger)timeLoaded;

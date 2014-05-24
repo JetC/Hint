@@ -36,7 +36,8 @@
     self = [super init];
     _friendsNameArray = [[NSMutableArray alloc]init];
     _friendsIconURLArray = [[NSMutableArray alloc]init];
-
+    self.friendsListInfoArray = [[NSMutableArray alloc]init];
+    
     _needToLoadAgain = YES;
     _timesFriendsListLoaded = 0;
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -113,15 +114,17 @@
 {
     for (id singlePersonInfo in arrayForResponse)
     {
-        [_friendsNameArray addObject:[singlePersonInfo objectForKey:@"name"]];
+        NSMutableDictionary *friendInfoDictionary = [[NSMutableDictionary alloc]initWithObjects:@[@"name",@"iconImage",@"iconImageUrl"] forKeys:@[@"name",@"iconImage",@"iconImageUrl"]];
+        [friendInfoDictionary setValue:[singlePersonInfo objectForKey:@"name"] forKey:@"name"];
         NSArray *iconURLArray = [[NSArray alloc]initWithArray:[singlePersonInfo objectForKey:@"avatar"]];
         for (NSDictionary *singlePersonIconArray in iconURLArray)
         {
             if ([[singlePersonIconArray objectForKey:@"size"] isEqualToString:@"HEAD"])
             {
-                [_friendsIconURLArray addObject:[singlePersonIconArray objectForKey:@"url"]];
+                [friendInfoDictionary setValue:[singlePersonIconArray objectForKey:@"url"] forKey:@"iconImageUrl"];
             }
         }
+        [self.friendsListInfoArray addObject:friendInfoDictionary];
     }
 
 }
