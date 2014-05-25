@@ -167,6 +167,9 @@
             else if (buttonIndex == 1)
             {
                 //在此发邮件
+                UIAlertView * alertView =[[UIAlertView alloc] initWithTitle:@"服务器乐于为您代劳" message:@"匿名邀请邮件已发送" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                alertView.tag = 4;
+                [alertView show];
             }
             break;
 
