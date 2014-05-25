@@ -124,19 +124,55 @@
 {
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"确认选择吗" message:[NSString stringWithFormat:@"确认选择%@为喜欢的对象吗",[[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"name"]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是的", nil];
     self.indexClicked = indexPath.row;
+    alertView.tag = 1;
     [alertView show];
 
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
+    switch (alertView.tag)
     {
-        NSLog(@"Canceled");
-    }
-    else if (buttonIndex == 1)
-    {
-        [self sendLovingHintOfUserID:[[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:self.indexClicked] objectForKey:@"id"]];
+        case 1:
+            if (buttonIndex == 0)
+            {
+                NSLog(@"Canceled");
+            }
+            else if (buttonIndex == 1)
+            {
+                [self sendLovingHintOfUserID:[[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:self.indexClicked] objectForKey:@"id"]];
+            }
+            break;
+
+        case 2:
+            if (buttonIndex == 0)
+            {
+                NSLog(@"Canceled");
+            }
+            else if (buttonIndex == 1)
+            {
+                UIAlertView * alertView =[[UIAlertView alloc] initWithTitle:@"输入TA的邮箱" message:@"Enter her Email" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: nil];
+                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                [alertView addButtonWithTitle:@"发送匿名邮件"];
+                alertView.tag = 3;
+                [alertView show];
+            }
+            break;
+
+        case 3:
+            if (buttonIndex == 0)
+            {
+                NSLog(@"Canceled");
+            }
+            else if (buttonIndex == 1)
+            {
+                //在此发邮件
+            }
+            break;
+
+        default:
+            break;
+
     }
 }
 
@@ -258,7 +294,11 @@
         matchInfo = [NSString stringWithFormat:@"你喜欢的%@妹子目前已经有%ld 个人暗暗喜欢了哟\n 还不快快动?",loverName,(long)loverBeloved];
     }
 
-    [self showAlertViewWithTitle:@"结果" message:matchInfo cancelButtonTitle:nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"结果" message:matchInfo delegate:self cancelButtonTitle:@"知道啦" otherButtonTitles:@"匿名告诉她", nil];
+    alertView.tag = 2;
+    [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+        [alertView show];
+    }];
 }
 
 - (void)showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle
