@@ -12,7 +12,7 @@
 #warning 把.pch里面的人人SDK放到合适的文件里
 
 
-@interface SFHistoryViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SFHistoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *lovedPeopleIconImageArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -36,7 +36,7 @@
 {
 //老黄说这里没问题
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundWithout64"]];
 
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
@@ -44,6 +44,7 @@
     self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    self.collectionView.backgroundColor = [UIColor clearColor];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"iconsLoadingFinished" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"historyFinished" object:nil];

@@ -214,6 +214,7 @@
     self.theNewItemTableView.delegate = self;
     self.theNewItemTableView.dataSource = self;
     self.theNewItemTableView.backgroundColor = [UIColor clearColor];
+    self.theNewItemTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     [self.view addSubview:self.theNewItemTableView];
 
@@ -232,7 +233,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 64;
+    return 84;
 }
 
 
