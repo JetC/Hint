@@ -43,6 +43,7 @@
 		DFB0014E1930FAC70078A221 /* SFHistoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB0014D1930FAC70078A221 /* SFHistoryCollectionViewCell.m */; };
 		DFB001521931165C0078A221 /* SFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB001511931165C0078A221 /* SFMapViewController.m */; };
 		DFB00155193118A10078A221 /* SFMyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB00154193118A10078A221 /* SFMyLocation.m */; };
+		DFB00157193171620078A221 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB00156193171620078A221 /* QuartzCore.framework */; };
 		DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */; };
 		DFF109C118DDD3A7003F3D57 /* SFSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */; };
 		DFF109C418DDD3D6003F3D57 /* SFAddingItemNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */; };
@@ -117,6 +118,7 @@
 		DFB001511931165C0078A221 /* SFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMapViewController.m; sourceTree = "<group>"; };
 		DFB00153193118A10078A221 /* SFMyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMyLocation.h; sourceTree = "<group>"; };
 		DFB00154193118A10078A221 /* SFMyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMyLocation.m; sourceTree = "<group>"; };
+		DFB00156193171620078A221 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DFF109BC18DDCD9F003F3D57 /* SFHistoryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryNavigationController.h; sourceTree = "<group>"; };
 		DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryNavigationController.m; sourceTree = "<group>"; };
 		DFF109BF18DDD3A7003F3D57 /* SFSettingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingNavigationController.h; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFB00157193171620078A221 /* QuartzCore.framework in Frameworks */,
 				DF91321218DD20AA008251DD /* Reveal.framework in Frameworks */,
 				DF80512E18D47FD2009D6103 /* libsqlite3.0.dylib in Frameworks */,
 				DF09153818D455460084B562 /* CoreGraphics.framework in Frameworks */,
@@ -174,6 +177,7 @@
 		DF09153418D455460084B562 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DFB00156193171620078A221 /* QuartzCore.framework */,
 				DF80512D18D47FD2009D6103 /* libsqlite3.0.dylib */,
 				DF09153518D455460084B562 /* Foundation.framework */,
 				DF09153718D455460084B562 /* CoreGraphics.framework */,

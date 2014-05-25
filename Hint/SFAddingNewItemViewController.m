@@ -10,6 +10,7 @@
 #import "SFRennFriendsListDelegate.h"
 #import "SFAddingNewItemTableViewCell.h"
 #import "SFRennFetchUserInfoDelegate.h"
+#import "QuartzCore/QuartzCore.h"
 
 @interface SFAddingNewItemViewController ()<NSURLSessionDelegate,UIAlertViewDelegate>
 
@@ -56,6 +57,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"iconsLoadingFinished" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"currentUserInfoLoaded" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTableViewData) name:@"reloadTableViewData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(checkLovingPersonHistory) name:@"addedLovingPerson" object:nil];
+
 
 }
 
@@ -91,6 +94,24 @@
     //当icon都加载完成之后
     {
         cell.iconImageView.image = [[[SFRennFriendsListDelegate sharedManager].friendsListInfoArray objectAtIndex:indexPath.row] objectForKey:@"iconImage"];
+
+
+//        //圆角设置
+//
+//        cell.imageView.layer.cornerRadius = 8;
+//        cell.imageView.layer.masksToBounds = YES;
+//
+//        //边框宽度及颜色设置
+//
+//        [cell.imageView.layer setBorderWidth:2];
+//
+//        [cell.imageView.layer setBorderColor:(__bridge CGColorRef)([UIColor blueColor])];  //设置边框为蓝色
+//        
+//        
+//        
+//        //自动适应,保持图片宽高比
+//        
+//        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     cell.backgroundColor = [UIColor clearColor];
 
@@ -299,7 +320,10 @@
         {
             NSDictionary *infoRecieved = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSMutableArray *lovedPeopleIDArray = [[NSMutableArray alloc]initWithArray:[infoRecieved objectForKey:@"have_love_id_list"]];
-            [lovedPeopleIDArray removeObjectAtIndex:0];
+            if (lovedPeopleIDArray.count > 1)
+            {
+                [lovedPeopleIDArray removeObjectAtIndex:0];
+            }
             [SFRennFriendsListDelegate sharedManager].lovedPeopleIDArray = lovedPeopleIDArray;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"historyFinished" object:nil];
 
@@ -308,6 +332,55 @@
     [dataTask resume];
 
 
+}
+
+
+static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,
+                                 float ovalHeight)
+{
+    float fw, fh;
+    if (ovalWidth == 0 || ovalHeight == 0) {
+        CGContextAddRect(context, rect);
+        return;
+    }
+
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGContextScaleCTM(context, ovalWidth, ovalHeight);
+    fw = CGRectGetWidth(rect) / ovalWidth;
+    fh = CGRectGetHeight(rect) / ovalHeight;
+
+    CGContextMoveToPoint(context, fw, fh/2);  // Start at lower right corner
+    CGContextAddArcToPoint(context, fw, fh, fw/2, fh, 1);  // Top right corner
+    CGContextAddArcToPoint(context, 0, fh, 0, fh/2, 1); // Top left corner
+    CGContextAddArcToPoint(context, 0, 0, fw/2, 0, 1); // Lower left corner
+    CGContextAddArcToPoint(context, fw, 0, fw, fh/2, 1); // Back to lower right
+
+    CGContextClosePath(context);
+    CGContextRestoreGState(context);
+}
+
+
++ (id) createRoundedRectImage:(UIImage*)image size:(CGSize)size
+{
+    // the size of CGContextRef
+    int w = size.width;
+    int h = size.height;
+
+    UIImage *img = image;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpace, kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, w, h);
+
+    CGContextBeginPath(context);
+    addRoundedRectToPath(context, rect, 10, 10);
+    CGContextClosePath(context);
+    CGContextClip(context);
+    CGContextDrawImage(context, CGRectMake(0, 0, w, h), img.CGImage);
+    CGImageRef imageMasked = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    return [UIImage imageWithCGImage:imageMasked];
 }
 
 

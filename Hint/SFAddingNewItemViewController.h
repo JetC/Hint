@@ -10,4 +10,7 @@
 
 @interface SFAddingNewItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
+- (void)checkLovingPersonHistory;
+
+
 @end

@@ -44,11 +44,9 @@
     self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundWith64"]];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"iconsLoadingFinished" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"historyFinished" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadLovedPeopleIcons) name:@"addedLovingPerson" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,10 +57,8 @@
 
 - (void)loadLovedPeopleIcons
 {
-    if (self.lovedPeopleIconImageArray == nil)
-    {
-        self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
-    }
+    self.lovedPeopleIconImageArray = [[NSMutableArray alloc]init];
+
     for (NSString *lovedPeopleID in [SFRennFriendsListDelegate sharedManager].lovedPeopleIDArray)
     {
         for (id friendInfo in [SFRennFriendsListDelegate sharedManager].friendsListInfoArray)
