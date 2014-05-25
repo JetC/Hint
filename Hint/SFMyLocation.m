@@ -27,7 +27,7 @@
     }
     else
     {
-        self.name = @"Unknown charge";
+        self.name = @"TA 的位置";
     }
     self.theCoordinate = coordinate;
     return self;

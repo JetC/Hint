@@ -44,6 +44,7 @@
 		DFB001521931165C0078A221 /* SFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB001511931165C0078A221 /* SFMapViewController.m */; };
 		DFB00155193118A10078A221 /* SFMyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB00154193118A10078A221 /* SFMyLocation.m */; };
 		DFB00157193171620078A221 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB00156193171620078A221 /* QuartzCore.framework */; };
+		DFB0015A19318B030078A221 /* SFMapViewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB0015919318B030078A221 /* SFMapViewNavigationController.m */; };
 		DFF109BE18DDCD9F003F3D57 /* SFHistoryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */; };
 		DFF109C118DDD3A7003F3D57 /* SFSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C018DDD3A7003F3D57 /* SFSettingNavigationController.m */; };
 		DFF109C418DDD3D6003F3D57 /* SFAddingItemNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF109C318DDD3D6003F3D57 /* SFAddingItemNavigationController.m */; };
@@ -119,6 +120,8 @@
 		DFB00153193118A10078A221 /* SFMyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMyLocation.h; sourceTree = "<group>"; };
 		DFB00154193118A10078A221 /* SFMyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMyLocation.m; sourceTree = "<group>"; };
 		DFB00156193171620078A221 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DFB0015819318B030078A221 /* SFMapViewNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMapViewNavigationController.h; sourceTree = "<group>"; };
+		DFB0015919318B030078A221 /* SFMapViewNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMapViewNavigationController.m; sourceTree = "<group>"; };
 		DFF109BC18DDCD9F003F3D57 /* SFHistoryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHistoryNavigationController.h; sourceTree = "<group>"; };
 		DFF109BD18DDCD9F003F3D57 /* SFHistoryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHistoryNavigationController.m; sourceTree = "<group>"; };
 		DFF109BF18DDD3A7003F3D57 /* SFSettingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSettingNavigationController.h; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 		DFB0014F193115EF0078A221 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				DFB0015819318B030078A221 /* SFMapViewNavigationController.h */,
+				DFB0015919318B030078A221 /* SFMapViewNavigationController.m */,
 				DFB001501931165C0078A221 /* SFMapViewController.h */,
 				DFB001511931165C0078A221 /* SFMapViewController.m */,
 				DFB00153193118A10078A221 /* SFMyLocation.h */,
@@ -450,6 +455,7 @@
 				DF8ECCA418F848450040B044 /* SFRennFriendsListWithTag+ ListUserFriendParam.m in Sources */,
 				DF42D5C718E0524C002E82CA /* NSObject+SBJSON.m in Sources */,
 				DF80505C18D47984009D6103 /* SFSettingViewController.m in Sources */,
+				DFB0015A19318B030078A221 /* SFMapViewNavigationController.m in Sources */,
 				DF80520D18D55126009D6103 /* SFAddingNewItemViewController.m in Sources */,
 				DFB0014E1930FAC70078A221 /* SFHistoryCollectionViewCell.m in Sources */,
 				DF09154618D455460084B562 /* SFAppDelegate.m in Sources */,

@@ -51,6 +51,7 @@
     [self setupViewVehiclePositionButton];
 
     [self fetchCarsPosition];
+
     [[NSOperationQueue mainQueue]addOperationWithBlock:^{
         [self.view bringSubviewToFront:self.viewVehiclePositionButton];
         [self.view bringSubviewToFront:self.backToCurrentPositionButton];
@@ -82,7 +83,7 @@
 
 - (IBAction)showPositionOfSelectedVehicle:(id)sender
 {
-    [self showPositionOfSelectedVehicle];
+    [self showMapViewWithinRegion:self.selectedVehicleCoordinate latitudinalMeters:300 longitudinalMeters:300];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,9 +113,11 @@
              [self putAnnotationOnMapFromArrayContainingDictionary:_vehiclesPositionDictionariesArray];
              static BOOL isFirstLoad = YES;
 
+
+//             self.selectedVehicleCoordinate.latitude =
                  if (isFirstLoad == YES)
                  {
-                     _viewVehiclePositionButton.titleLabel.text = [NSString stringWithFormat:@"看看%@的车去",[[_vehiclesPositionDictionariesArray objectAtIndex:0] objectForKey:@"bus_name"]];
+//                     _viewVehiclePositionButton.titleLabel.text = [NSString stringWithFormat:@"看看%@的车去",[[_vehiclesPositionDictionariesArray objectAtIndex:0] objectForKey:@"bus_name"]];
                  }
                  isFirstLoad = NO;
                  if (_selectedVehicleCoordinate.latitude != 0)
@@ -124,34 +127,6 @@
              }
      }];
      }
-
-
-
-#pragma mark Config PickerView
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return _vehiclesPositionDictionariesArray.count;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [[_vehiclesPositionDictionariesArray objectAtIndex:row] objectForKey:@"bus_name"];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    NSString *item = [self pickerView:pickerView titleForRow:row forComponent:component];
-    _selectedVehicleName = item;
-    _selectedRowNumber = row;
-    [_viewVehiclePositionButton setTitle:[NSString stringWithFormat:@"看看%@的车去" ,item] forState:UIControlStateNormal];
-}
-
 
 
 
@@ -174,6 +149,7 @@
     }
     else
     {
+        
         pinAnnotation.annotation = annotation;
     }
     pinAnnotation.canShowCallout = YES;
@@ -182,6 +158,17 @@
 
     return pinAnnotation;
 
+}
+
+- (IBAction)gotoHerPosition:(id)sender
+{
+
+}
+
+- (IBAction)herHistory:(id)sender
+{
+    UIAlertView *alertView =  [[UIAlertView alloc]initWithTitle:@"TA 经常出现的位置" message:@"武汉大学图书馆\n 武汉大学信息学部操场 \n 武汉大学国际软件学院" delegate:nil cancelButtonTitle:@"好的！" otherButtonTitles:nil];
+    [alertView show];
 }
 
 
@@ -232,12 +219,12 @@
 
 - (void)showMapViewWithCenter:(CLLocationCoordinate2D)centerCoordinate
 {
-    [self showMapViewWithinRegion:centerCoordinate latitudinalMeters:500 longitudinalMeters:500];
+    [self showMapViewWithinRegion:centerCoordinate latitudinalMeters:1000 longitudinalMeters:1000];
 }
 
 - (void)showCurrentPosition
 {
-    [self showMapViewWithinRegion:_myCoordinate latitudinalMeters:500 longitudinalMeters:500];
+    [self showMapViewWithinRegion:_myCoordinate latitudinalMeters:1000 longitudinalMeters:1000];
 }
 
 - (NSMutableArray *)serializingJsonDataToArrayContainingDictionary:(NSData *)data
@@ -263,6 +250,7 @@
             return;
         }
         CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[vehicleInfoDic objectForKey:@"latitude"] doubleValue], [[vehicleInfoDic objectForKey:@"longitude"] doubleValue]);
+        self.selectedVehicleCoordinate = location;
         NSLog(@"latitude:%f,longitude:%f,%@",location.latitude,location.longitude,[vehicleInfoDic objectForKey:@"bus_name"]);
         SFMyLocation *locationForAnnotation = [[SFMyLocation alloc]initWithName:[vehicleInfoDic objectForKey:@"bus_name"] coordinate:location];
         [_vehicleAnnotationsArray addObject:locationForAnnotation];
@@ -305,6 +293,16 @@
 
     }
 
+}
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    animated = YES;
+}
+
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    animated = YES;
 }
 
 - (void)setupViewVehiclePositionButton
